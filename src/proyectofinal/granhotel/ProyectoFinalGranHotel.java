@@ -24,7 +24,7 @@ public class ProyectoFinalGranHotel {
         // TODO code application logic here
     
     
-      Connection con = Conexion.getConexion();
+//      Connection con = Conexion.getConexion();
 
         
         HuespedData hd = new HuespedData();
@@ -70,7 +70,7 @@ public class ProyectoFinalGranHotel {
 //        habData.guardarHabitacion(new Habitacion(false, thd.buscarTipoHabitacion(7)));
 //        habData.guardarHabitacion(new Habitacion(false, thd.buscarTipoHabitacion(8)));
         
-        
+        System.out.println("Probando el push y pull");
         
         
         
