@@ -23,8 +23,8 @@ public class HuespedData {
         
         if (buscarHuespedPorDni(huesped.getDni()) == null) {
             
-            String sql = "INSERT INTO huesped (dni, apellido, nombre, domicilio, correo, celular) "
-                    + "VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO huesped (dni, apellido, nombre, domicilio, correo, celular, activo) "
+                    + "VALUES (?,?,?,?,?,?,?)";
 
             try {
 
@@ -35,6 +35,7 @@ public class HuespedData {
                 ps.setString(4, huesped.getDomicilio());
                 ps.setString(5, huesped.getCorreo());
                 ps.setInt(6, huesped.getCelular());
+                ps.setBoolean(7, huesped.isActivo());
                 if (ps.executeUpdate() > 0) {
                     JOptionPane.showMessageDialog(null, "HUESPED GUARDADO EXITOSAMENTE");
                 }
@@ -50,7 +51,7 @@ public class HuespedData {
     
     public void modificarHuesped(Huesped huesped){
         
-        String sql = "UPDATE huesped SET apellido=?, nombre=?, domicilio=?, correo=?, celular=? "
+        String sql = "UPDATE huesped SET apellido=?, nombre=?, domicilio=?, correo=?, celular=?, activo=?"
                 + "WHERE dni=?";
         
         try {
@@ -62,6 +63,7 @@ public class HuespedData {
             ps.setString(4, huesped.getCorreo());
             ps.setInt(5, huesped.getCelular());
             ps.setInt(6, huesped.getDni());
+            ps.setBoolean(7, huesped.isActivo());
             if(ps.executeUpdate() > 0){
                 JOptionPane.showMessageDialog(null, "HUESPED MODIFICADO EXITOSAMENTE");
             }
@@ -74,7 +76,7 @@ public class HuespedData {
     
     public Huesped buscarHuespedPorDni(int dni){
         
-        String sql = "SELECT apellido, nombre, domicilio, correo, celular "
+        String sql = "SELECT apellido, nombre, domicilio, correo, celular, activo "
                 + "FROM huesped WHERE dni=?";
         Huesped huesped = null;
         
@@ -90,6 +92,7 @@ public class HuespedData {
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getInt("celular"));
+                huesped.setActivo(rs.getBoolean("activo"));
             }else{
                 JOptionPane.showMessageDialog(null, "NO EXISTE EL HUESPED");
             }
@@ -102,7 +105,7 @@ public class HuespedData {
     
     public List<Huesped> listarHistorialDeHuespedes(){
         
-        String sql = "SELECT dni, apellido, nombre, domicilio, correo, celular "
+        String sql = "SELECT dni, apellido, nombre, domicilio, correo, celular, activo "
                 + "FROM huesped";
         ArrayList<Huesped> huespedes = new ArrayList<>();
         
@@ -117,6 +120,7 @@ public class HuespedData {
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getInt("celular"));
+                huesped.setActivo(rs.getBoolean("activo"));
                 
                 huespedes.add(huesped);
             }
@@ -126,12 +130,11 @@ public class HuespedData {
         }
         return huespedes;
     }
-    //PROBAR listarHuespedesConReserva() CUANDO HAYA RESERVAS
-    public List<Huesped> listarHuespedesConReservas(){
+    
+    public List<Huesped> listarHuespedesActivos(){
         
         String sql = "SELECT dni, apellido, nombre, domicilio, correo, celular "
-                + "FROM huesped, reserva WHERE huesped.dni = reserva.dniHuesped "
-                + "AND reserva.estado = 1";
+                + "FROM huesped WHERE activo = 1";
         ArrayList<Huesped> huespedes = new ArrayList<>();
         
         try {
@@ -145,6 +148,7 @@ public class HuespedData {
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getInt("celular"));
+                huesped.setActivo(true);
                 
                 huespedes.add(huesped);
             }

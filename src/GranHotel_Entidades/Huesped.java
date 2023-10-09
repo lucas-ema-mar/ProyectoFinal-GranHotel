@@ -17,17 +17,19 @@ public class Huesped {
     private String domicilio;
     private String correo;
     private int celular;
+    private boolean activo;
 
     public Huesped() {
     }
 
-    public Huesped(int dni, String apellido, String nombre, String domicilio, String correo, int celular) {
+    public Huesped(int dni, String apellido, String nombre, String domicilio, String correo, int celular, boolean activo) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.correo = correo;
         this.celular = celular;
+        this.activo = activo;
     }
 
     public int getDni() {
@@ -76,6 +78,14 @@ public class Huesped {
 
     public void setCelular(int celular) {
         this.celular = celular;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
