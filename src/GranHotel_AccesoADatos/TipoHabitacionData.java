@@ -85,7 +85,7 @@ public class TipoHabitacionData {
         
     }
     
-    public TipoHabitacion buscarTipoHabitacion(int codigo){
+    public TipoHabitacion buscarTipoHabitacionPorCodigo(int codigo){
         
         String sql = "SELECT maxPersonas, cantCamas, tipoCama, precio FROM tipohabitacion "
                 + "WHERE codigo=?";
@@ -112,21 +112,21 @@ public class TipoHabitacionData {
         return tipoHab;
     }
     
-    public void eliminarTipoHabitacion(int codigo){
-        
-        String sql = "DELETE FROM tipohabitacion WHERE codigo=?";
-        
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, codigo);
-            if(ps.executeUpdate()>0){
-                JOptionPane.showMessageDialog(null, "TIPO DE HABITACION ELIMINADA EXITOSAMENTE");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA TIPOHABITACION. " + ex.getMessage());
-        }
-    }
+//    public void eliminarTipoHabitacion(int codigo){
+//        
+//        String sql = "DELETE FROM tipohabitacion WHERE codigo=?";
+//        
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, codigo);
+//            if(ps.executeUpdate()>0){
+//                JOptionPane.showMessageDialog(null, "TIPO DE HABITACION ELIMINADA EXITOSAMENTE");
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA TIPOHABITACION. " + ex.getMessage());
+//        }
+//    }
     
     public List<TipoHabitacion> listarTiposDeHabitaciones(){
         
@@ -182,16 +182,16 @@ public class TipoHabitacionData {
     }
     
     private boolean existeTipo(TipoHabitacion tipoHab){
-        boolean valor = false;
+        boolean existe = false;
         List<TipoHabitacion> tipos = listarTiposDeHabitaciones();
         for(TipoHabitacion aux : tipos){
             if(aux.getMaxPersonas() == tipoHab.getMaxPersonas() 
                 && aux.getCantCamas() == tipoHab.getCantCamas()
                     && aux.getTipoDeCama().equals(tipoHab.getTipoDeCama())){
-                valor = true;
+                existe = true;
             }
         }
-        return valor;
+        return existe;
     }
     
     

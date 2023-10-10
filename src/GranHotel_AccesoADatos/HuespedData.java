@@ -21,31 +21,26 @@ public class HuespedData {
     
     public void guardarHuesped(Huesped huesped){
         
-        if (buscarHuespedPorDni(huesped.getDni()) == null) {
-            
-            String sql = "INSERT INTO huesped (dni, apellido, nombre, domicilio, correo, celular, activo) "
-                    + "VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO huesped (dni, apellido, nombre, domicilio, correo, celular, activo) "
+                + "VALUES (?,?,?,?,?,?,?)";
 
-            try {
+        try {
 
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setInt(1, huesped.getDni());
-                ps.setString(2, huesped.getApellido());
-                ps.setString(3, huesped.getNombre());
-                ps.setString(4, huesped.getDomicilio());
-                ps.setString(5, huesped.getCorreo());
-                ps.setInt(6, huesped.getCelular());
-                ps.setBoolean(7, huesped.isActivo());
-                if (ps.executeUpdate() > 0) {
-                    JOptionPane.showMessageDialog(null, "HUESPED GUARDADO EXITOSAMENTE");
-                }
-                ps.close();
-
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA HUESPED. " + ex.getMessage());
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, huesped.getDni());
+            ps.setString(2, huesped.getApellido());
+            ps.setString(3, huesped.getNombre());
+            ps.setString(4, huesped.getDomicilio());
+            ps.setString(5, huesped.getCorreo());
+            ps.setInt(6, huesped.getCelular());
+            ps.setBoolean(7, huesped.isActivo());
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "HUESPED GUARDADO EXITOSAMENTE");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "YA EXISTE EL HUESPED");
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA HUESPED. " + ex.getMessage());
         }
     }
     
@@ -101,6 +96,38 @@ public class HuespedData {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA HUESPED. " + ex.getMessage());
         }
         return huesped;
+    }
+    
+    public void altaHuesped(int dni){
+        
+        String sql = "UPDATE huesped SET activo = 1 WHERE dni = ? ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "HUESPED DADO DE ALTA");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA HUESPED. " + ex.getMessage());
+        }
+    }
+    
+    public void bajaHuesped(int dni){
+        
+        String sql = "UPDATE huesped SET activo = 0 WHERE dni = ? ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "HUESPED DADO DE BAJA");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER EN LA TABLA HUESPED. " + ex.getMessage());
+        }
     }
     
     public List<Huesped> listarHistorialDeHuespedes(){
