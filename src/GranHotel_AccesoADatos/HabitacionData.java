@@ -44,17 +44,17 @@ public class HabitacionData {
     
     public Habitacion buscarHabitacion(int num){
         
-        String sql = "SELECT ocupada, tipoHabitacion FROM habitacion "
-                + "WHERE num=?";
+        String sql = "SELECT ocupada, tipoHabitacion "
+                + "FROM habitacion WHERE num=?";
         Habitacion hab = null;
         TipoHabitacionData thd = null;
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, num);
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                hab = new Habitacion();
                 thd = new TipoHabitacionData();
                 hab.setNum(num);
                 hab.setOcupada(rs.getBoolean("ocupada"));

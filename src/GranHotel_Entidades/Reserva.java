@@ -53,7 +53,7 @@ private int idReserva;
         return huesped;
     }
 
-    public void setHuesped(Huesped huespd) {
+    public void setHuesped(Huesped huesped) {
         this.huesped = huesped;
     }
 
