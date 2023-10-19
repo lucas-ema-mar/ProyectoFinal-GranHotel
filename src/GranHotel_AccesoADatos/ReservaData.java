@@ -5,6 +5,7 @@
  */
 package GranHotel_AccesoADatos;
 
+import GranHotel_Entidades.Huesped;
 import GranHotel_Entidades.Reserva;
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,6 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 
@@ -86,18 +91,21 @@ public class ReservaData {
         return reserva;
     }
     
-    public Reserva buscarPorDni(int dni){
+    public List<Reserva> buscarPorDni(int dni){
         
         String sql = "SELECT idReserva, numHabitacion, fechaIngreso, fechaSalida, "
                 + "cantDias, cantPersonas, precioTotal, estado FROM reserva WHERE dniHuesped = ?";
-        Reserva reserva = null;
+        ArrayList<Reserva> reservas= new ArrayList<>();
+
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            
             ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                reserva = new Reserva();
+            
+            while(rs.next()){
+                Reserva reserva = new Reserva();
                 HuespedData huesData = new HuespedData();
                 HabitacionData habData = new HabitacionData();
                 reserva.setIdReserva(rs.getInt("idReserva"));
@@ -109,28 +117,31 @@ public class ReservaData {
                 reserva.setCantPersonas(rs.getInt("cantPersonas"));
                 reserva.setPrecioTotal(rs.getDouble("precioTotal"));
                 reserva.setEstado(rs.getBoolean("estado"));
-            }else{
-                JOptionPane.showMessageDialog(null, "EL DNI INGRESADO NO TIENE RESERVAS");
-            }
+                reservas.add(reserva);
+        }
+            
+                
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
         }
-        return reserva;
+        return reservas;
     }
     
-    public Reserva buscarPorFecha(LocalDate fecha){
+    public List <Reserva> buscarPorFecha(LocalDate fecha){
         
         String sql = "SELECT idReserva, dniHuesped, numHabitacion, fechaSalida, "
                 + "cantDias, cantPersonas, precioTotal, estado FROM reserva WHERE fechaIngreso = ?";
-        Reserva reserva = null;
         
-        try {
+        ArrayList<Reserva> reservas= new ArrayList<>();
+        
+        
+        try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                reserva = new Reserva();
+            while(rs.next()){
+                Reserva reserva = new Reserva();
                 HuespedData huesData = new HuespedData();
                 HabitacionData habData = new HabitacionData();
                 reserva.setIdReserva(rs.getInt("idReserva"));
@@ -142,37 +153,75 @@ public class ReservaData {
                 reserva.setCantPersonas(rs.getInt("cantPersonas"));
                 reserva.setPrecioTotal(rs.getDouble("precioTotal"));
                 reserva.setEstado(rs.getBoolean("estado"));
-            }else{
-                JOptionPane.showMessageDialog(null, "NO TIENE RESERVAS EN ESA FECHA");
+            
+                reservas.add(reserva);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
         }
-        return reserva;
+        return reservas;
     }
     
-    public void cancelarReserva(int idRes){
-        
+    public void cancelarReserva(int idRes) {
+
         String sql = "UPDATE reserva SET estado = 0 WHERE idReserva = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idRes);
-            if(ps.executeUpdate() > 0){
+            if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "RESERVA Nro." + idRes + " CANCELADA");
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
         }
+
     }
     
     
-    
-    
-    
-    
-    
-    
+    public void modificarReserva(Reserva reserva) {
+        String sql = "UPDATE reserva SET dniHuesped=?, numHabitacion=?, fechaIngreso=?,fechaSalida=?, "
+                + "cantDias=?, cantPersonas=?, precioTotal=? , estado=? WHERE idReserva=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, reserva.getHuesped().getDni());
+            ps.setInt(2, reserva.getHabitacion().getNum());
+            ps.setDate(3, Date.valueOf(reserva.getFechaIngreso()));
+            ps.setDate(4, Date.valueOf(reserva.getFechaSalida()));
+            ps.setInt(5, reserva.getCantDias());
+            ps.setInt(6, reserva.getCantPersonas());
+            ps.setDouble(7, reserva.getPrecioTotal());
+            ps.setBoolean(8, reserva.isEstado());
+            ps.setInt(9, reserva.getIdReserva());
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Reserva modificada");
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
+        }
+
+    }
+
+//
+//    public void finReserva(Huesped huesped) {
+//        String sql = "UPDATE reserva SET Activo = 0 WHERE id= "
+//                + " huesped.id";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            if (huesped.Activo == 1) {
+//              
+//                huesped.Activo = 0;
+//                habitacion.Libre = 0;
+//                
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
+//        }
+//    }
+
 }
