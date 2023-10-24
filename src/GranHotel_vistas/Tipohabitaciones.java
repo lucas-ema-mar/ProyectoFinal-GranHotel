@@ -39,7 +39,7 @@ public class Tipohabitaciones extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         Boton1 = new javax.swing.JRadioButton();
         Boton2 = new javax.swing.JRadioButton();
-        Jtext = new javax.swing.JTextField();
+        texto = new javax.swing.JTextField();
         Boton3 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -88,7 +88,7 @@ public class Tipohabitaciones extends javax.swing.JInternalFrame {
             }
         });
 
-        Jtext.setEnabled(false);
+        texto.setEnabled(false);
 
         Boton3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Boton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,6 +125,11 @@ public class Tipohabitaciones extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton2.setText("Limpiar");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +145,7 @@ public class Tipohabitaciones extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(Boton1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Jtext, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(Jbuscar))
                             .addComponent(jLabel2)
@@ -165,7 +170,7 @@ public class Tipohabitaciones extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Jtext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Jbuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,9 +210,15 @@ Jbuscar.setEnabled(false);
   Boton2.setEnabled(false);
 
   Jbuscar.setEnabled(true);
-  Jtext.setEnabled(true);
+  texto.setEnabled(true);
   
     }//GEN-LAST:event_Boton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+texto.setText("");
+
+            
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,7 +226,6 @@ Jbuscar.setEnabled(false);
     private javax.swing.JRadioButton Boton2;
     private javax.swing.JRadioButton Boton3;
     private javax.swing.JButton Jbuscar;
-    private javax.swing.JTextField Jtext;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -223,6 +233,7 @@ Jbuscar.setEnabled(false);
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField texto;
     // End of variables declaration//GEN-END:variables
 class FondoPanel extends JPanel{
     private Image imagen;

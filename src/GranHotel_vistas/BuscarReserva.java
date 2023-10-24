@@ -38,10 +38,10 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
         BotonId = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        texto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Boton3 = new javax.swing.JRadioButton();
@@ -81,9 +81,10 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        texto.setEnabled(false);
+        texto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textoActionPerformed(evt);
             }
         });
 
@@ -95,13 +96,19 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Elija El Modo De Busquedad");
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        Buscar.setText("Buscar");
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.setEnabled(false);
 
         jButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton2.setText("Limpiar");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("(Sin Puntos,Ni Espacios)");
@@ -139,9 +146,9 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
                         .addComponent(Boton3))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(Buscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(jButton2)))
@@ -163,8 +170,8 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscar))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -175,9 +182,9 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textoActionPerformed
 
     private void BotonDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDniActionPerformed
 
@@ -185,6 +192,8 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
       BotonId.setEnabled(false);
      Boton3.setSelected(false);
      Boton3.setEnabled(false);
+     Buscar.setEnabled(true);
+     texto.setEnabled(true);
 
 
 
@@ -196,6 +205,8 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
         Boton3.setEnabled(false);
         BotonDni.setSelected(false);
         BotonDni.setEnabled(false);
+        Buscar.setEnabled(true);
+        texto.setEnabled(true);
     }//GEN-LAST:event_BotonIdActionPerformed
 
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
@@ -204,24 +215,31 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
       BotonId.setEnabled(false);
       BotonDni.setSelected(false);
       BotonDni.setEnabled(false);
-      
+      Buscar.setEnabled(true);
+      texto.setEnabled(true);
      
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        texto.setText("");
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Boton3;
     private javax.swing.JRadioButton BotonDni;
     private javax.swing.JRadioButton BotonId;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Buscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField texto;
     // End of variables declaration//GEN-END:variables
 class FondoPanel extends JPanel{
     private Image imagen;

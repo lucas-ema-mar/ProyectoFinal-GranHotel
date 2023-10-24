@@ -5,16 +5,19 @@
  */
 package GranHotel_vistas;
 
+import GranHotel_AccesoADatos.HuespedData;
+import GranHotel_Entidades.Huesped;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Usuario
  */
-public class AgregarHuesped extends javax.swing.JInternalFrame {
+public class AgregarHuesped extends javax.swing.JInternalFrame {   
 FondoPanel fondo=new FondoPanel();
     /**
      * Creates new form AgregarHuesped
@@ -49,8 +52,9 @@ FondoPanel fondo=new FondoPanel();
         Jdomi = new javax.swing.JTextField();
         Jcorreo = new javax.swing.JTextField();
         Jestado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        boton = new javax.swing.JButton();
+        Limpiar = new javax.swing.JButton();
+        texto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -91,26 +95,76 @@ FondoPanel fondo=new FondoPanel();
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Estado(true/else)");
 
+        Jnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JnombreKeyReleased(evt);
+            }
+        });
+
+        Japellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JapellidoKeyReleased(evt);
+            }
+        });
+
+        Jdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JdniKeyReleased(evt);
+            }
+        });
+
         Jnumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JnumeroActionPerformed(evt);
             }
         });
-
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Registrar");
-        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        Jnumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JnumeroKeyReleased(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton2.setText("Limpiar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Jdomi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JdomiKeyReleased(evt);
+            }
+        });
+
+        Jcorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JcorreoKeyReleased(evt);
+            }
+        });
+
+        Jestado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JestadoKeyReleased(evt);
+            }
+        });
+
+        boton.setBackground(new java.awt.Color(0, 204, 204));
+        boton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        boton.setText("Registrar");
+        boton.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton.setEnabled(false);
+        boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActionPerformed(evt);
+            }
+        });
+
+        Limpiar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        Limpiar.setText("Limpiar");
+        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+
+        texto.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        texto.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,13 +192,15 @@ FondoPanel fondo=new FondoPanel();
                             .addComponent(Japellido)
                             .addComponent(Jdomi)
                             .addComponent(Jcorreo)
-                            .addComponent(Jestado)))
+                            .addComponent(Jestado))
+                        .addGap(18, 18, 18)
+                        .addComponent(texto))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(boton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(Limpiar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,15 +230,17 @@ FondoPanel fondo=new FondoPanel();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Jcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Jcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texto))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Jestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(boton)
+                    .addComponent(Limpiar))
                 .addContainerGap())
         );
 
@@ -192,7 +250,7 @@ FondoPanel fondo=new FondoPanel();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(702, Short.MAX_VALUE))
+                .addContainerGap(704, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,18 +264,114 @@ FondoPanel fondo=new FondoPanel();
         // TODO add your handling code here:
     }//GEN-LAST:event_JnumeroActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     Japellido.setText("");
-     Jcorreo.setText("");
-     Jdni.setText("");
-     Jdomi.setText("");
-     Jestado.setText("");
-     Jnombre.setText("");
-     Jnumero.setText("");
+    private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
+HuespedData hues=new HuespedData();
+Huesped huesped=new Huesped();
 
 
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+huesped.setNombre(Jnombre.getText());
+huesped.setApellido(Japellido.getText());
+huesped.setDni(Integer.parseInt(Jdni.getText()));
+
+huesped.setCelular(Integer.parseInt((Jnumero.getText())));
+
+huesped.setDomicilio(Jdomi.getText());
+huesped.setCorreo(Jcorreo.getText());
+huesped.setActivo(Boolean.valueOf(Jestado.getText()));
+
+hues.guardarHuesped(huesped);
+limpiar();
+
+    }//GEN-LAST:event_botonActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+     limpiar();
+    }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void JnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JnombreKeyReleased
+     
+        validacion(evt);
+        Liberar();
+        
+  
+     
+      
+    }//GEN-LAST:event_JnombreKeyReleased
+
+    private void JapellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JapellidoKeyReleased
+
+        validacion(evt);
+        Liberar();
+      
+        
+    }//GEN-LAST:event_JapellidoKeyReleased
+
+    private void JdniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JdniKeyReleased
+
+         
+Numer(evt);
+if(Jdni.getText().length()==8){
+    Jdni.setEditable(false);
+    Jdni.setEnabled(false);
+    Liberar();
+    
+    
+}
+    }//GEN-LAST:event_JdniKeyReleased
+
+    private void JnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JnumeroKeyReleased
+
+
+Numer(evt);
+Liberar();
+if(Jnumero.getText().length()==10){
+Jnumero.setEditable(false);
+Jnumero.setEnabled(false);
+}
+    }//GEN-LAST:event_JnumeroKeyReleased
+
+    private void JdomiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JdomiKeyReleased
+
+  
+Liberar(); 
+
+
+
+    }//GEN-LAST:event_JdomiKeyReleased
+
+    private void JcorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcorreoKeyReleased
+
+
+Correo(evt);
+Liberar();
+
+        
+    }//GEN-LAST:event_JcorreoKeyReleased
+
+    private void JestadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JestadoKeyReleased
+
+validacion(evt);
+
+        if (Jestado.getText().length() == 4) {
+            if (Jestado.getText() == "true" || Jestado.getText() == "TRUE" || Jestado.getText() == "else" || Jestado.getText() == "ELSE") {
+
+              JOptionPane.showMessageDialog(this, "INGRESE TRUE O ELSE");
+                Jestado.setText("");
+                  Liberar();
+               
+            }else
+                
+                Jestado.setEditable(false);
+                Jestado.setEnabled(false);
+                boton.setEnabled(true);
+                        }
+            
+        
+    
+                     
+
+    }//GEN-LAST:event_JestadoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,8 +382,8 @@ FondoPanel fondo=new FondoPanel();
     private javax.swing.JTextField Jestado;
     private javax.swing.JTextField Jnombre;
     private javax.swing.JTextField Jnumero;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Limpiar;
+    private javax.swing.JButton boton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -239,6 +393,7 @@ FondoPanel fondo=new FondoPanel();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel texto;
     // End of variables declaration//GEN-END:variables
 class FondoPanel extends JPanel{
     private Image imagen;
@@ -261,7 +416,109 @@ class FondoPanel2 extends JPanel{
     }
 }
 
-
+private void limpiar(){
+     Japellido.setText("");
+     Jcorreo.setText("");
+     Jdni.setText("");
+     Jdomi.setText("");
+     Jestado.setText("");
+     Jnombre.setText("");
+     Jnumero.setText("");
+     
+     boton.setEnabled(false);
+     Jestado.setEditable(true);
+     Jdni.setEditable(true);
+     Jdni.setEnabled(true);
+     Jnumero.setEditable(true);
+     Jnumero.setEnabled(true);
+     Jestado.setEditable(true);
+     Jestado.setEnabled(true);
+     
+     
+     
+     
 
 
 }
+
+public void validacion(java.awt.event.KeyEvent evento){
+    
+//codigo para verificar caracteres 
+    if(evento.getKeyChar()>=33 && evento.getKeyChar()<=64 
+            || evento.getKeyChar()>=91 && evento.getKeyChar()<=96
+            || evento.getKeyChar()>=123 && evento.getKeyChar()<=208){
+        
+        evento.consume();
+        JOptionPane.showMessageDialog(this, "NO SE PERMITEN CARACTERES ESPECIALES");
+        limpiar();
+        
+    }
+      
+    }
+ public void CampoVacio(java.awt.event.KeyEvent evento){
+     if(Jnombre.getText().isEmpty()||Japellido.getText().isEmpty()||Japellido.getText().isEmpty()
+    ||Jdni.getText().isEmpty()||Jdomi.getText().isEmpty()
+     ||Jestado.getText().isEmpty()||Jnombre.getText().isEmpty()||Jnumero.getText().isEmpty()){
+         
+         if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+         JOptionPane.showMessageDialog(this,"DEBE LLERNAR TODOS LOS CAMPOS");
+         limpiar();
+     }
+         else
+             boton.setEnabled(true);
+     }
+ }
+public void Correo(java.awt.event.KeyEvent evento){
+     if(evento.getKeyChar()>=32 && evento.getKeyChar()<=44 
+             || evento.getKeyChar()==47
+             || evento.getKeyChar()>=58&&evento.getKeyChar()<=63
+             || evento.getKeyChar()>=91&&evento.getKeyChar()<=94
+             || evento.getKeyChar()==96
+             || evento.getKeyChar()>=123 &&evento.getKeyChar()<=255){
+         evento.consume();
+         JOptionPane.showMessageDialog(this,"NO SE PERMITE ESE CARACTER");
+         limpiar();
+     }
+ 
+           
+}
+
+public void Numer(java.awt.event.KeyEvent evento){
+    
+   if(evento.getKeyChar()>=32&&evento.getKeyChar()<=47
+            || evento.getKeyChar() >= 58 && evento.getKeyChar() <= 255) {
+        evento.consume();
+        JOptionPane.showMessageDialog(this, "INGRESE SOLO NUMEROS,SIN SIMBOLOS");
+        limpiar();
+        
+   }
+    
+}
+public void Liberar(){
+    if(!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()&&!Japellido.getText().isEmpty()
+    &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+        if(Jdni.getText().length()<=8&&Jdni.getText().length()>=0){
+        boton.setEnabled(true);
+        }
+        
+    }
+    if(!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()&&!Japellido.getText().isEmpty()
+    &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+        if(Jdni.getText().length()<=8&&Jdni.getText().length()>=0){
+        boton.setEnabled(true);
+        }
+        
+
+    }
+}
+}
+
+
+
+
+
+

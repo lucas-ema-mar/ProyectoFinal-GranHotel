@@ -431,165 +431,157 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-Escritorio.repaint();
-ModificarPrecio mod=new ModificarPrecio();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);  
+        Escritorio.repaint();
+        ModificarPrecio mod = new ModificarPrecio();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
 
-
-        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MouseClicked
 
 
-    
     }//GEN-LAST:event_jMenuItem3MouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-Escritorio.repaint();
-ModificarHuesped mod=new ModificarHuesped();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);  
+        Escritorio.repaint();
+        ModificarHuesped mod = new ModificarHuesped();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
 
-
-      
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-Escritorio.repaint();
-AltaHuesped mod=new AltaHuesped();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);  
+        Escritorio.repaint();
+        AltaHuesped mod = new AltaHuesped();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
 
-    
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
- Escritorio.repaint();
- ModificarHabitacion mod=new ModificarHabitacion();
- mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);  
+        Escritorio.repaint();
+        ModificarHabitacion mod = new ModificarHabitacion();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-   
-Escritorio.repaint();
-AgregarHuesped mod=new AgregarHuesped();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod); 
 
+        Escritorio.repaint();
+        AgregarHuesped mod = new AgregarHuesped();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-     Escritorio.repaint();
-AgregarTipoHabitacion mod=new AgregarTipoHabitacion();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);
-        
+        Escritorio.repaint();
+        AgregarTipoHabitacion mod = new AgregarTipoHabitacion();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-     
+
         Escritorio.repaint();
-BuscarHuesped mod=new BuscarHuesped();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+        BuscarHuesped mod = new BuscarHuesped();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-      
+
         Escritorio.repaint();
-BuscarHabitacion mod=new BuscarHabitacion();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+        BuscarHabitacion mod = new BuscarHabitacion();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-      
+
         Escritorio.repaint();
-HistorialHuesped mod=new HistorialHuesped();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+        HistorialHuesped mod = new HistorialHuesped();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-       
+
         Escritorio.repaint();
-Reservar mod=new Reservar();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+        Reservar mod = new Reservar();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        
-Escritorio.repaint();
-CancelarReserva mod=new CancelarReserva();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+
+        Escritorio.repaint();
+        CancelarReserva mod = new CancelarReserva();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        
-Escritorio.repaint();
-AgregarHabitacion mod=new AgregarHabitacion();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+
+        Escritorio.repaint();
+        AgregarHabitacion mod = new AgregarHabitacion();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        
-Escritorio.repaint();
-BuscarReserva mod=new BuscarReserva();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);// TODO add your handling code here:
+
+        Escritorio.repaint();
+        BuscarReserva mod = new BuscarReserva();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-         Escritorio.repaint();
- HuespedesActivos mod=new HuespedesActivos();
+        Escritorio.repaint();
+        HuespedesActivos mod = new HuespedesActivos();
         mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod); 
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
 
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
- Escritorio.repaint();
- BuscarTipoHabitacion mod=new BuscarTipoHabitacion();
+        Escritorio.repaint();
+        BuscarTipoHabitacion mod = new BuscarTipoHabitacion();
         mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod);         // TODO add your handling code here:
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);         // TODO add your handling code here:
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-Escritorio.repaint();
-Tipohabitaciones mod=new Tipohabitaciones();
-mod.setVisible(true);
-Escritorio.add(mod);
-Escritorio.moveToFront(mod); 
-        
+        Escritorio.repaint();
+        Tipohabitaciones mod = new Tipohabitaciones();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);
+
     }//GEN-LAST:event_jButton22ActionPerformed
 
     /**
@@ -656,25 +648,30 @@ Escritorio.moveToFront(mod);
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
-class FondoPanel extends JPanel{
-    private Image imagen;
-    @Override
-    public void paint(Graphics g){
-        imagen=new ImageIcon(getClass().getResource("/Imagenes/hotel2.jpg")).getImage();
-        g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-        setOpaque(false);
-        super.paint(g);
- }
-}
-class FondoPanel3 extends JPanel{
-    private Image imagen;
-    @Override
-    public void paint(Graphics g){
-        imagen=new ImageIcon(getClass().getResource("/Imagenes/fondo1.jpg")).getImage();
-        g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-        setOpaque(false);
-        super.paint(g);
+class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/Imagenes/hotel2.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
     }
-}
+
+    class FondoPanel3 extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/Imagenes/fondo1.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 
 }

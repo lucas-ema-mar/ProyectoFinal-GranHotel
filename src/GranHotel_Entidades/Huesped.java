@@ -31,6 +31,7 @@ public class Huesped {
         this.celular = celular;
         this.activo = activo;
     }
+ 
 
     public int getDni() {
         return dni;
