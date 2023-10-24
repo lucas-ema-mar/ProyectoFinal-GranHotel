@@ -46,7 +46,7 @@ public class HuespedData {
     
     public void modificarHuesped(Huesped huesped){
         
-        String sql = "UPDATE huesped SET apellido=?, nombre=?, domicilio=?, correo=?, celular=?, activo=?"
+        String sql = "UPDATE huesped SET apellido=?, nombre=?, domicilio=?, correo=?, celular=?, activo=? "
                 + "WHERE dni=?";
         
         try {
@@ -57,8 +57,8 @@ public class HuespedData {
             ps.setString(3, huesped.getDomicilio());
             ps.setString(4, huesped.getCorreo());
             ps.setInt(5, huesped.getCelular());
-            ps.setInt(6, huesped.getDni());
-            ps.setBoolean(7, huesped.isActivo());
+            ps.setBoolean(6, huesped.isActivo());
+            ps.setInt(7, huesped.getDni());
             if(ps.executeUpdate() > 0){
                 JOptionPane.showMessageDialog(null, "HUESPED MODIFICADO EXITOSAMENTE");
             }
