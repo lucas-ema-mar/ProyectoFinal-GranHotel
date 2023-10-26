@@ -5,6 +5,9 @@
  */
 package GranHotel_vistas;
 
+import GranHotel_AccesoADatos.TipoHabitacionData;
+import GranHotel_Entidades.TipoCama;
+import GranHotel_Entidades.TipoHabitacion;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -23,7 +26,9 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
      */
     public AgregarTipoHabitacion() {
         this.setContentPane(fondo);
+        
         initComponents();
+       rellenarcombo();
     }
 
     /**
@@ -43,9 +48,10 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
         combo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         precio = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        boton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
@@ -76,13 +82,17 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
                 cantcamasActionPerformed(evt);
             }
         });
+        cantcamas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cantcamasKeyReleased(evt);
+            }
+        });
 
         asd.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         asd.setForeground(new java.awt.Color(255, 255, 255));
         asd.setText("Tipo De Cama");
 
         combo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " SIMPLE", " QUEEN", " KING_SIZE", "    ", " " }));
         combo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         combo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -90,12 +100,19 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio");
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                precioKeyReleased(evt);
+            }
+        });
+
+        boton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        boton.setText("Agregar");
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton.setEnabled(false);
+        boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonActionPerformed(evt);
             }
         });
 
@@ -119,15 +136,14 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(asd)
                         .addComponent(max)
                         .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cantcamas, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
+                        .addComponent(cantcamas, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
                     .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(136, Short.MAX_VALUE))
@@ -153,9 +169,9 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
                 .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,12 +181,23 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cantcamasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
+        TipoHabitacionData tipocama = new TipoHabitacionData();
+        TipoHabitacion habitacion = new TipoHabitacion();
+
+        habitacion.setCantCamas(Integer.parseInt(cantcamas.getText()));
+        habitacion.setMaxPersonas(Integer.parseInt(max.getText()));
+        habitacion.setTipoDeCama((TipoCama) combo.getSelectedItem());
+        habitacion.setPrecio(Integer.parseInt(precio.getText()));
+
+        tipocama.guardarTipoHabitacion(habitacion);
+        limpiar();
+
+
+    }//GEN-LAST:event_botonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+limpiar();     
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -181,25 +208,69 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
     private void maxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_maxKeyReleased
 
 
-
 VeriNum(evt);
-if(Integer.parseInt(max.getText())>=1){
-}else
-    if(Integer.parseInt(max.getText())<=5){
-        max.setEnabled(true);
-    
 
-    
+if(Integer.parseInt(max.getText())>=1&&Integer.parseInt(max.getText())<=8){
+        max.setEnabled(false);
+}else 
+    if(Integer.parseInt(max.getText())<0||Integer.parseInt(max.getText())>9){
+        JOptionPane.showMessageDialog(this, "NO SE PERMITE ESA CANTIDAD DE PERSONAS");
+        JOptionPane.showMessageDialog(this, "DEBE INGRESAR ENTRE 1 A 8 PERSONAS");
+        max.setText("");
+    }else
+        if(max.getText().length()>1){
+        JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN CARACTER");
+        max.setText("");
+        }
+   //CODIGO PARA VERIFICAR CAMPOS VACIOS
+if(!max.getText().isEmpty()&&!cantcamas.getText().isEmpty()&&!precio.getText().isEmpty()){
+    boton.setEnabled(true);
 }
-
+   
+    
+    
+    
     }//GEN-LAST:event_maxKeyReleased
+
+    private void cantcamasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantcamasKeyReleased
+VeriNum(evt);
+if(Integer.parseInt(cantcamas.getText())<1||Integer.parseInt(cantcamas.getText())>4){
+    JOptionPane.showMessageDialog(this, "DEBE INGRESAR ENTRE 1 A 4 CAMAS");
+    cantcamas.setText("");
+}else
+    if(cantcamas.getText().length()>1){
+        JOptionPane.showMessageDialog(this, "DEBE INGRESAR 1 SOLO CARACTER NUMERICO");
+        cantcamas.setText("");
+    }else
+        cantcamas.setEnabled(false);
+
+//CODIGO PARA VERIFICAR CAMPOS VACIOS
+if(!max.getText().isEmpty()&&!cantcamas.getText().isEmpty()&&!precio.getText().isEmpty()){
+    boton.setEnabled(true);
+}
+    }//GEN-LAST:event_cantcamasKeyReleased
+
+    private void precioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyReleased
+VeriNum(evt);
+//prueba
+
+if(precio.getText().length()>5){
+    JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NUMERO MENOR A 5 CARACTERES");
+    precio.setText("");
+    boton.setEnabled(false);
+}
+//CODIGO PARA VERIFICAR CAMPOS VACIOS
+if(!max.getText().isEmpty()&&!cantcamas.getText().isEmpty()&&!precio.getText().isEmpty()){
+    boton.setEnabled(true);
+}
+    }//GEN-LAST:event_precioKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel asd;
+    private javax.swing.JButton boton;
     private javax.swing.JTextField cantcamas;
-    private javax.swing.JComboBox<String> combo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<TipoCama> combo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -236,6 +307,13 @@ private void limpiar(){
     cantcamas.setText("");
     precio.setText("");
     
+    max.setEnabled(true);
+    max.setEditable(true);
+    cantcamas.setEnabled(true);
+    cantcamas.setEditable(true);
+    precio.setEnabled(true);
+    precio.setEditable(true);
+    boton.setEnabled(false);
 }
 
 
@@ -245,18 +323,21 @@ private void VeriNum(java.awt.event.KeyEvent evento){
             || evento.getKeyChar() >= 58 && evento.getKeyChar() <= 255) {
         evento.consume();
         JOptionPane.showMessageDialog(this, "INGRESE SOLO NUMEROS,SIN SIMBOLOS");
-        limpiar();
+        
         
    }
 }
+
+public void rellenarcombo(){
+  combo.addItem(TipoCama.KING_SIZE);
+  combo.addItem(TipoCama.QUEEN);
+  combo.addItem(TipoCama.SIMPLE);
+}
+
     
     
     
-    
-    
-    
-    
-    
+
     
     
     

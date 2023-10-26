@@ -273,9 +273,7 @@ Huesped huesped=new Huesped();
 huesped.setNombre(Jnombre.getText());
 huesped.setApellido(Japellido.getText());
 huesped.setDni(Integer.parseInt(Jdni.getText()));
-
 huesped.setCelular(Integer.parseInt((Jnumero.getText())));
-
 huesped.setDomicilio(Jdomi.getText());
 huesped.setCorreo(Jcorreo.getText());
 huesped.setActivo(Boolean.valueOf(Jestado.getText()));
@@ -293,7 +291,17 @@ limpiar();
      
         validacion(evt);
         Liberar();
-        
+        if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
   
      
       
@@ -303,7 +311,17 @@ limpiar();
 
         validacion(evt);
         Liberar();
-      
+      if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
         
     }//GEN-LAST:event_JapellidoKeyReleased
 
@@ -315,9 +333,19 @@ if(Jdni.getText().length()==8){
     Jdni.setEditable(false);
     Jdni.setEnabled(false);
     Liberar();
-    
-    
 }
+
+if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
     }//GEN-LAST:event_JdniKeyReleased
 
     private void JnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JnumeroKeyReleased
@@ -329,13 +357,34 @@ if(Jnumero.getText().length()==10){
 Jnumero.setEditable(false);
 Jnumero.setEnabled(false);
 }
+if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
     }//GEN-LAST:event_JnumeroKeyReleased
 
     private void JdomiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JdomiKeyReleased
 
   
 Liberar(); 
-
+if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
 
 
     }//GEN-LAST:event_JdomiKeyReleased
@@ -346,6 +395,7 @@ Liberar();
 Correo(evt);
 Liberar();
 
+
         
     }//GEN-LAST:event_JcorreoKeyReleased
 
@@ -354,18 +404,20 @@ Liberar();
 validacion(evt);
 
         if (Jestado.getText().length() == 4) {
-            if (Jestado.getText() == "true" || Jestado.getText() == "TRUE" || Jestado.getText() == "else" || Jestado.getText() == "ELSE") {
+            if (Jestado.getText() != "true" || Jestado.getText() != "TRUE" || Jestado.getText() != "else" || Jestado.getText() != "ELSE") {
 
               JOptionPane.showMessageDialog(this, "INGRESE TRUE O ELSE");
                 Jestado.setText("");
-                  Liberar();
-               
-            }else
-                
-                Jestado.setEditable(false);
+                Jestado.setEnabled(true);
+                  Jestado.setEditable(true);
+            }
+        }
+        if(Jestado.getText().length()==4){
+            if(Jestado.getText()=="true"||Jestado.getText()=="TRUE"||Jestado.getText()=="else"||Jestado.getText()=="ELSE"){
                 Jestado.setEnabled(false);
-                boton.setEnabled(true);
-                        }
+                Jestado.setEditable(false);
+            }
+        }
             
         
     
@@ -460,15 +512,8 @@ public void validacion(java.awt.event.KeyEvent evento){
     ||Jdni.getText().isEmpty()||Jdomi.getText().isEmpty()
      ||Jestado.getText().isEmpty()||Jnombre.getText().isEmpty()||Jnumero.getText().isEmpty()){
          
-         if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
-             texto.setText("DEBE CONTENER @ Y .COM");
-         
-         JOptionPane.showMessageDialog(this,"DEBE LLERNAR TODOS LOS CAMPOS");
-         limpiar();
      }
-         else
-             boton.setEnabled(true);
-     }
+     
  }
 public void Correo(java.awt.event.KeyEvent evento){
      if(evento.getKeyChar()>=32 && evento.getKeyChar()<=44 
@@ -481,9 +526,20 @@ public void Correo(java.awt.event.KeyEvent evento){
          JOptionPane.showMessageDialog(this,"NO SE PERMITE ESE CARACTER");
          limpiar();
      }
- 
-           
+  if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
+             texto.setText("DEBE CONTENER @ Y .COM");
+         
+   
+     }
+         else
+            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
+     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+             boton.setEnabled(true);
+            }
 }
+           
+
 
 public void Numer(java.awt.event.KeyEvent evento){
     
