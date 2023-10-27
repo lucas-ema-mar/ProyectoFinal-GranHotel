@@ -5,10 +5,17 @@
  */
 package GranHotel_vistas;
 
+import GranHotel_AccesoADatos.ReservaData;
+import GranHotel_Entidades.Reserva;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +23,11 @@ import javax.swing.JPanel;
  */
 public class BuscarReserva extends javax.swing.JInternalFrame {
     FondoPanel fondo=new FondoPanel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        public boolean isCellEditable(int f, int c){
+            return false;
+        }
+    };
 
     /**
      * Creates new form BuscarReserva
@@ -23,6 +35,7 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
     public BuscarReserva() {
         this.setContentPane(fondo);
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -34,93 +47,91 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BotonDni = new javax.swing.JRadioButton();
-        BotonId = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        texto = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jtReservas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        Buscar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        Boton3 = new javax.swing.JRadioButton();
+        jbLimpiar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jdcFecha = new com.toedter.calendar.JDateChooser();
+        jbBuscar = new javax.swing.JButton();
+        jtNumReserva = new javax.swing.JTextField();
+        jtDni = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
 
-        BotonDni.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        BotonDni.setForeground(new java.awt.Color(255, 255, 255));
-        BotonDni.setText("Buscar Por Dni");
-        BotonDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonDniActionPerformed(evt);
-            }
-        });
-
-        BotonId.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        BotonId.setForeground(new java.awt.Color(255, 255, 255));
-        BotonId.setText("Buscar Por Id");
-        BotonId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonIdActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nro Reserva", "Apellido", "Dni", "Habitacion", "Fecha Ing.", "Cant. Dias", "Precio Total", "Estado"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class
+            };
 
-        texto.setEnabled(false);
-        texto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoActionPerformed(evt);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(jtReservas);
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ingrese Info .");
-
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Elija El Modo De Busquedad");
+        jLabel1.setText("Reserva/s");
 
-        Buscar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        Buscar.setText("Buscar");
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Buscar.setEnabled(false);
-
-        jButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton2.setText("Limpiar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("(Sin Puntos,Ni Espacios)");
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Por nro. de reserva");
 
-        Boton3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        Boton3.setForeground(new java.awt.Color(255, 255, 255));
-        Boton3.setText("Buscar Por fecha");
-        Boton3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Por dni del huesped");
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Por fecha de inicio");
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton3ActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
+
+        jtNumReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNumReservaKeyReleased(evt);
+            }
+        });
+
+        jtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDniKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Complete el campo por el cual desea buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,119 +139,196 @@ public class BuscarReserva extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(280, 280, 280)
+                        .addComponent(jbLimpiar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BotonDni)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addComponent(BotonId)
-                        .addGap(44, 44, 44)
-                        .addComponent(Boton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Buscar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jButton2)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNumReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 132, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonDni)
-                    .addComponent(BotonId)
-                    .addComponent(Boton3))
-                .addGap(14, 14, 14)
+                    .addComponent(jLabel4)
+                    .addComponent(jtNumReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscar))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel5)
+                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(jbBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoActionPerformed
+    private void jtNumReservaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumReservaKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_textoActionPerformed
+        jtDni.setText("");
+        jdcFecha.setDate(null);
+    }//GEN-LAST:event_jtNumReservaKeyReleased
 
-    private void BotonDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDniActionPerformed
-
-      BotonId.setSelected(false);
-      BotonId.setEnabled(false);
-     Boton3.setSelected(false);
-     Boton3.setEnabled(false);
-     Buscar.setEnabled(true);
-     texto.setEnabled(true);
-
-
-
-        
-    }//GEN-LAST:event_BotonDniActionPerformed
-
-    private void BotonIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIdActionPerformed
-        Boton3.setSelected(false);
-        Boton3.setEnabled(false);
-        BotonDni.setSelected(false);
-        BotonDni.setEnabled(false);
-        Buscar.setEnabled(true);
-        texto.setEnabled(true);
-    }//GEN-LAST:event_BotonIdActionPerformed
-
-    private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
-
-      BotonId.setSelected(false);
-      BotonId.setEnabled(false);
-      BotonDni.setSelected(false);
-      BotonDni.setEnabled(false);
-      Buscar.setEnabled(true);
-      texto.setEnabled(true);
-     
+    private void jtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_Boton3ActionPerformed
+        jtNumReserva.setText("");
+        jdcFecha.setDate(null);
+    }//GEN-LAST:event_jtDniKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        texto.setText("");
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
         
+        try {
+
+            ReservaData rd = new ReservaData();
+            borrarFilas();
+
+            if (jtNumReserva.getText().equals("") && jtDni.getText().equals("") && jdcFecha.getDate() == null) {
+
+                JOptionPane.showMessageDialog(this, "Ingrese algun parametro por el cual buscar una reserva");
+
+            } else if (jtNumReserva.getText().equals("") && jtDni.getText().equals("") && jdcFecha.getDate() != null) {
+
+                LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                List<Reserva> reservas = rd.buscarPorFecha(fecha);
+                if (reservas == null) {
+                    JOptionPane.showMessageDialog(this, "No hay reservas con el dni ingresado");
+                } else {
+                    for (Reserva res : reservas) {
+                        cargarTabla(res);
+                    }
+                }
+
+            } else if (jtNumReserva.getText().equals("") && !jtDni.getText().equals("") && jdcFecha.getDate() == null) {
+
+                List<Reserva> reservas = rd.buscarPorDni(Integer.valueOf(jtDni.getText()));
+                if (reservas == null) {
+                    JOptionPane.showMessageDialog(this, "No hay reservas con esa fecha de ingreso");
+                } else {
+                    for (Reserva res : reservas) {
+                        cargarTabla(res);
+                    }
+                }
+
+            } else {
+
+                Reserva res = rd.buscarPorId(Integer.valueOf(jtNumReserva.getText()));
+                cargarTabla(res);
+
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un numero valido");
+            limpiarCampos();
+        }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton Boton3;
-    private javax.swing.JRadioButton BotonDni;
-    private javax.swing.JRadioButton BotonId;
-    private javax.swing.JButton Buscar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField texto;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbLimpiar;
+    private com.toedter.calendar.JDateChooser jdcFecha;
+    private javax.swing.JTextField jtDni;
+    private javax.swing.JTextField jtNumReserva;
+    private javax.swing.JTable jtReservas;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera(){
+        
+        modelo.addColumn("Nro Reserva");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Dni");
+        modelo.addColumn("Habitacion");
+        modelo.addColumn("Fecha Ing.");
+        modelo.addColumn("Cant. Dias");
+        modelo.addColumn("Precio Total");
+        modelo.addColumn("Estado");
+        jtReservas.setModel(modelo);
+        
+    }
+    
+    private void limpiarCampos(){
+        
+        borrarFilas();
+        jtDni.setText("");
+        jtNumReserva.setText("");
+        jdcFecha.setDate(null);
+        
+    }
+    
+    private void borrarFilas(){
+        
+        for(int filas = jtReservas.getRowCount()-1; filas >= 0 ; filas--){
+            modelo.removeRow(filas);
+        }
+        
+    }
+    
+    private void cargarTabla(Reserva res){
+        
+        modelo.addRow(new Object[]{
+                    res.getIdReserva(),
+                    res.getHuesped().getApellido(),
+                    res.getHuesped().getDni(),
+                    res.getHabitacion().getNum(),
+                    res.getFechaIngreso(),
+                    res.getCantDias(),
+                    "$ " + res.getPrecioTotal(),
+                    (res.isEstado() ? "Activa" : "Inactiva")
+                });
+        
+    }
+    
 class FondoPanel extends JPanel{
     private Image imagen;
     @Override

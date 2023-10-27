@@ -136,6 +136,19 @@ public class HabitacionData {
     public List<Habitacion> listarPorCantidadPersonas(int cantPers){
         
         //PRIMERA MANERA
+        List<Habitacion> habitaciones = listarHabitaciones();
+        ArrayList<Habitacion> aux = new ArrayList<>();
+        for(Habitacion hab : habitaciones){
+            if(hab.getTipoHabitacion().getMaxPersonas() == cantPers){
+                aux.add(hab);
+            }
+        }
+        return aux;
+    }
+    
+    public List<Habitacion> listarDisponiblesPorCantidadPersonas(int cantPers){
+        
+        //PRIMERA MANERA
         List<Habitacion> habitaciones = listarDisponibles();
         ArrayList<Habitacion> disponibles = new ArrayList<>();
         for(Habitacion hab : habitaciones){
