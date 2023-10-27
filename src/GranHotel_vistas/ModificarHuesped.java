@@ -25,6 +25,7 @@ FondoPanel fondo=new FondoPanel();
     public ModificarHuesped() {
         this.setContentPane(fondo);
         initComponents();
+        limpiarCampos();
     }
 
     /**
@@ -36,7 +37,6 @@ FondoPanel fondo=new FondoPanel();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jtDNI = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -53,16 +53,14 @@ FondoPanel fondo=new FondoPanel();
         jtDomicilio = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
         jtCelular = new javax.swing.JTextField();
-        jrbEstado = new javax.swing.JRadioButton();
+        jrbActivo = new javax.swing.JRadioButton();
+        jrbInactivo = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
-
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ingrese DNI del Huesped");
 
         jbBuscar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jbBuscar.setText("Buscar");
@@ -77,6 +75,11 @@ FondoPanel fondo=new FondoPanel();
 
         jbModificar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbLimpiar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jbLimpiar.setText("Limpiar");
@@ -104,7 +107,13 @@ FondoPanel fondo=new FondoPanel();
         jLabelEstado.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelEstado.setText("Estado");
 
-        jrbEstado.setText("jRadioButton1");
+        jrbActivo.setText("ACTIVO");
+
+        jrbInactivo.setText("INACTIVO");
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("INGRESE DNI DEL HUESPED");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,54 +126,52 @@ FondoPanel fondo=new FondoPanel();
                         .addGap(77, 77, 77)
                         .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jbBuscar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jbModificar)
-                                .addGap(127, 127, 127)
-                                .addComponent(jbLimpiar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtApellido))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtNombre))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtDomicilio))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtCorreo))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtCelular))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(122, 122, 122))
+                        .addGap(95, 95, 95)
+                        .addComponent(jbModificar)
+                        .addGap(127, 127, 127)
+                        .addComponent(jbLimpiar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jrbActivo)
+                            .addGap(54, 54, 54)
+                            .addComponent(jrbInactivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtApellido))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtNombre))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtDomicilio))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtCorreo))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtCelular))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,47 +199,85 @@ FondoPanel fondo=new FondoPanel();
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbEstado))
+                    .addComponent(jrbActivo)
+                    .addComponent(jrbInactivo))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar)
                     .addComponent(jbLimpiar))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void limpiarCampos() {
+        jbModificar.setEnabled(false);
+        jtDNI.setEnabled(true);
         jtDNI.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jtDomicilio.setText("");
+        jtCorreo.setText("");
+        jtCelular.setText("");
+        jrbActivo.setSelected(false);
+        jrbInactivo.setEnabled(false);
     }
      
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
             Integer dni = Integer.parseInt(jtDNI.getText());
-            HuespedData hd= new HuespedData();
-            Huesped hues= hd.buscarHuespedPorDni(dni);
+            HuespedData hd = new HuespedData();
+            Huesped hues = hd.buscarHuespedPorDni(dni);
             
-            if( hues==null ){
-            JOptionPane.showMessageDialog(this,"El DNI ingresado no existe");
-            limpiarCampos();
+            if (hues == null) {
+                JOptionPane.showMessageDialog(this, "El DNI ingresado no existe");
+                limpiarCampos();
             } else {
-            //HASTA ACA //
+                jbModificar.setEnabled(true);
+                jtDNI.setEnabled(false);
+                jtApellido.setText(hues.getApellido());
+                jtNombre.setText(hues.getNombre());
+                jtDomicilio.setText(hues.getDomicilio());
+                jtCelular.setText(hues.getCelular() + "");
+                if (hues.isActivo()) {
+                    jrbActivo.setSelected(true);
+                    jrbInactivo.setSelected(false);
+                } else {
+                    jrbActivo.setSelected(false);
+                }
+                jrbInactivo.setSelected(true);
+                
             }
             
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un DNI, sin caracteres");
+            limpiarCampos();
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-jtDNI.setText("");        
+        limpiarCampos();
 
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+      
+        try {
+            HuespedData hd = new HuespedData();
+            Huesped hues = new Huesped(Integer.parseInt(jtDNI.getText()), jtApellido.getText(), jtNombre.getText(),
+                    jtDomicilio.getText(), jtCorreo.getText(), Integer.parseInt(jtCelular.getText()), jrbActivo.isSelected());
+            hd.modificarHuesped(hues);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un numero de celular sin caracteres");
+            limpiarCampos();
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelCelular;
     private javax.swing.JLabel jLabelCorreo;
@@ -242,7 +287,8 @@ jtDNI.setText("");
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JRadioButton jrbActivo;
+    private javax.swing.JRadioButton jrbInactivo;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtCorreo;
