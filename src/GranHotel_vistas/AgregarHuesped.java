@@ -19,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class AgregarHuesped extends javax.swing.JInternalFrame {   
 FondoPanel fondo=new FondoPanel();
+int num=0;
     /**
      * Creates new form AgregarHuesped
      */
@@ -265,22 +266,114 @@ FondoPanel fondo=new FondoPanel();
     }//GEN-LAST:event_JnumeroActionPerformed
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
-HuespedData hues=new HuespedData();
-Huesped huesped=new Huesped();
+        HuespedData hues = new HuespedData();
+        Huesped huesped = new Huesped();
+        int a = 0;
 
+        if (Jnombre.getText().isEmpty()) {
 
+            JOptionPane.showMessageDialog(this, "INGRESE UN NOMBRE");
+            boton.setEnabled(false);
+            Jnombre.setText("");
+            Jnombre.setEnabled(true);
+            Jnombre.setEditable(true);
+        } else {
+            huesped.setNombre(Jnombre.getText());
+            a = a + 1;
+        }
 
-huesped.setNombre(Jnombre.getText());
-huesped.setApellido(Japellido.getText());
-huesped.setDni(Integer.parseInt(Jdni.getText()));
-huesped.setCelular(Integer.parseInt((Jnumero.getText())));
-huesped.setDomicilio(Jdomi.getText());
-huesped.setCorreo(Jcorreo.getText());
-huesped.setActivo(Boolean.valueOf(Jestado.getText()));
+        if (Japellido.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN APELLIDO");
+            boton.setEnabled(false);
+            Japellido.setText("");
+            Japellido.setEnabled(true);
+            Japellido.setEditable(true);
+        } else {
+            huesped.setApellido(Japellido.getText());
+            a = a + 1;
+        }
 
-hues.guardarHuesped(huesped);
-limpiar();
+        if (Jdni.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN DNI");
+            boton.setEnabled(false);
+            Jdni.setText("");
+            Jdni.setEnabled(true);
+            Jdni.setEditable(true);
+        } else {
+            if(Jdni.getText().length()<8||Jdni.getText().length()>8){
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN DNI CON 8 DIGITOS");
+                boton.setEnabled(false);
+                Jdni.setText("");
+                Jdni.setEnabled(true);
+                Jdni.setEditable(true);
+            
+            }else
+                
+            huesped.setDni(Integer.parseInt(Jdni.getText()));
+            a = a + 1;
+        }
+    
 
+        if (Jnumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN NUMERO TELEFONICO");
+            boton.setEnabled(false);
+            Jnumero.setText("");
+            Jnumero.setEditable(true);
+            Jnumero.setEnabled(true);
+        } else {
+            huesped.setCelular(num);
+            a = a + 1;
+        }
+
+        if (Jdomi.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN DOMICILIO");
+            boton.setEnabled(false);
+            Jdomi.setText("");
+            Jdomi.setEnabled(true);
+            Jdomi.setEditable(true);
+            boton.setEnabled(false);
+        } else {
+            huesped.setDomicilio(Jdomi.getText());
+            a = a + 1;
+        }
+
+        if (Jcorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN CORREO ");
+            boton.setEnabled(false);
+            Jcorreo.setText("");
+            Jcorreo.setEditable(true);
+            Jcorreo.setEnabled(true);
+
+        } else {
+            if (!Jcorreo.getText().contains("@") || !Jcorreo.getText().contains(".com")) {
+                JOptionPane.showMessageDialog(this, "INGRESE UN CORREO VALIDO");
+
+                texto.setText("DEBE CONTENER @ Y .COM");
+                Jcorreo.setText("");
+                Jcorreo.setEnabled(true);
+                Jcorreo.setEditable(true);
+                boton.setEnabled(false);
+            } else {
+
+                huesped.setCorreo(Jcorreo.getText());
+                a = a + 1;
+            }
+        }
+
+        if (Jestado.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE UN ESTADO");
+            Jestado.setText("");
+            Jestado.setEditable(true);
+            Jestado.setEnabled(true);
+        } else {
+            huesped.setActivo(Boolean.valueOf(Jestado.getText()));
+            a = a + 1;
+        }
+
+        if (a == 7) {
+            hues.guardarHuesped(huesped);
+            limpiar();
+        }
     }//GEN-LAST:event_botonActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
@@ -290,9 +383,10 @@ limpiar();
     private void JnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JnombreKeyReleased
      
         validacion(evt);
-        Liberar();
+        
         if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
              texto.setText("DEBE CONTENER @ Y .COM");
+            
          
    
      }
@@ -303,14 +397,14 @@ limpiar();
              boton.setEnabled(true);
             }
   
-     
+     CampoVacio();
       
     }//GEN-LAST:event_JnombreKeyReleased
 
     private void JapellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JapellidoKeyReleased
 
         validacion(evt);
-        Liberar();
+        
       if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
              texto.setText("DEBE CONTENER @ Y .COM");
          
@@ -322,6 +416,7 @@ limpiar();
      &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
              boton.setEnabled(true);
             }
+      CampoVacio();
         
     }//GEN-LAST:event_JapellidoKeyReleased
 
@@ -332,59 +427,40 @@ Numer(evt);
 if(Jdni.getText().length()==8){
     Jdni.setEditable(false);
     Jdni.setEnabled(false);
-    Liberar();
+    
 }
 
-if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
-             texto.setText("DEBE CONTENER @ Y .COM");
-         
-   
-     }
-         else
-            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
-     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-             boton.setEnabled(true);
-            }
+
+CampoVacio();
     }//GEN-LAST:event_JdniKeyReleased
 
     private void JnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JnumeroKeyReleased
 
 
 Numer(evt);
-Liberar();
+
 if(Jnumero.getText().length()==10){
 Jnumero.setEditable(false);
 Jnumero.setEnabled(false);
+num=Integer.parseInt(Jnumero.getText());
+
+
 }
-if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
-             texto.setText("DEBE CONTENER @ Y .COM");
-         
-   
-     }
-         else
-            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
-     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-             boton.setEnabled(true);
-            }
+
+CampoVacio();
     }//GEN-LAST:event_JnumeroKeyReleased
 
     private void JdomiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JdomiKeyReleased
 
-  
-Liberar(); 
+validacion(evt);
+
 if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
              texto.setText("DEBE CONTENER @ Y .COM");
          
    
      }
-         else
-            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
-     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-             boton.setEnabled(true);
-            }
+         
+            
 
 
     }//GEN-LAST:event_JdomiKeyReleased
@@ -393,8 +469,8 @@ if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
 
 
 Correo(evt);
-Liberar();
 
+CampoVacio();
 
         
     }//GEN-LAST:event_JcorreoKeyReleased
@@ -402,27 +478,27 @@ Liberar();
     private void JestadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JestadoKeyReleased
 
 validacion(evt);
-
-        if (Jestado.getText().length() == 4) {
-            if (Jestado.getText() != "true" || Jestado.getText() != "TRUE" || Jestado.getText() != "else" || Jestado.getText() != "ELSE") {
-
-              JOptionPane.showMessageDialog(this, "INGRESE TRUE O ELSE");
-                Jestado.setText("");
-                Jestado.setEnabled(true);
-                  Jestado.setEditable(true);
-            }
-        }
-        if(Jestado.getText().length()==4){
-            if(Jestado.getText()=="true"||Jestado.getText()=="TRUE"||Jestado.getText()=="else"||Jestado.getText()=="ELSE"){
+   if (Jestado.getText().length() == 4) {
+            String a = Jestado.getText();
+            if ("else".equals(a) || "ELSE".equals(a) || "true".equals(a) || "TRUE".equals(a)) {
                 Jestado.setEnabled(false);
                 Jestado.setEditable(false);
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O ELSE");
+                Jestado.setText("");
+                boton.setEnabled(false);
+                
             }
-        }
             
-        
-    
-                     
+            
+        }
 
+ 
+            
+
+    CampoVacio();
+ 
     }//GEN-LAST:event_JestadoKeyReleased
 
 
@@ -485,6 +561,9 @@ private void limpiar(){
      Jnumero.setEnabled(true);
      Jestado.setEditable(true);
      Jestado.setEnabled(true);
+     Jcorreo.setEnabled(true);
+     Jcorreo.setEditable(true);
+     
      
      
      
@@ -507,11 +586,11 @@ public void validacion(java.awt.event.KeyEvent evento){
     }
       
     }
- public void CampoVacio(java.awt.event.KeyEvent evento){
-     if(Jnombre.getText().isEmpty()||Japellido.getText().isEmpty()||Japellido.getText().isEmpty()
-    ||Jdni.getText().isEmpty()||Jdomi.getText().isEmpty()
-     ||Jestado.getText().isEmpty()||Jnombre.getText().isEmpty()||Jnumero.getText().isEmpty()){
-         
+ public void CampoVacio(){
+     if(!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()&&!Japellido.getText().isEmpty()
+    &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
+     &&!Jestado.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
+         boton.setEnabled(true);
      }
      
  }
@@ -526,17 +605,10 @@ public void Correo(java.awt.event.KeyEvent evento){
          JOptionPane.showMessageDialog(this,"NO SE PERMITE ESE CARACTER");
          limpiar();
      }
-  if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
-             texto.setText("DEBE CONTENER @ Y .COM");
-         
+  
    
-     }
-         else
-            if(!Jcorreo.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()
-     &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-             boton.setEnabled(true);
-            }
+     
+        
 }
            
 
@@ -552,26 +624,10 @@ public void Numer(java.awt.event.KeyEvent evento){
    }
     
 }
-public void Liberar(){
-    if(!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()&&!Japellido.getText().isEmpty()
-    &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-        if(Jdni.getText().length()<=8&&Jdni.getText().length()>=0){
-        boton.setEnabled(true);
-        }
-        
-    }
-    if(!Jnombre.getText().isEmpty()&&!Japellido.getText().isEmpty()&&!Japellido.getText().isEmpty()
-    &&!Jdni.getText().isEmpty()&&!Jdomi.getText().isEmpty()
-     &&!Jestado.getText().isEmpty()&&!Jnombre.getText().isEmpty()&&!Jnumero.getText().isEmpty()){
-        if(Jdni.getText().length()<=8&&Jdni.getText().length()>=0){
-        boton.setEnabled(true);
-        }
-        
+}
 
-    }
-}
-}
+
+
 
 
 

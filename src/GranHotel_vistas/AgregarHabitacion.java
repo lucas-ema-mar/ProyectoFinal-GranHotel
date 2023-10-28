@@ -56,7 +56,7 @@ public class AgregarHabitacion extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Estado(true/else)");
+        jLabel2.setText("Ocupada(true/else)");
 
         estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +128,7 @@ public class AgregarHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregar)
                     .addComponent(Limpiar))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,26 +146,26 @@ limpiar();
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void estadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_estadoKeyReleased
-validacion(evt);
-  if (estado.getText().length() == 4) {
-            if (estado.getText() != "true" || estado.getText() != "TRUE" || estado.getText() != "else" || estado.getText() != "ELSE") {
-
-              JOptionPane.showMessageDialog(this, "INGRESE TRUE O ELSE");
-                estado.setText("");
-                estado.setEnabled(true);
-                estado.setEditable(true);
-                agregar.setEnabled(false);
-            } 
-  }
-  
-  
-  
-  if(!estado.getText().isEmpty()){
-      agregar.setEnabled(true);
-  
-  }    
-
         
+        validacion(evt);
+        
+        if (estado.getText().length() == 4) {
+            String a = estado.getText();
+            if ("else".equals(a) || "ELSE".equals(a) || "true".equals(a) || "TRUE".equals(a)) {
+                estado.setEnabled(false);
+                estado.setEditable(false);
+                agregar.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O ELSE");
+                estado.setText("");
+                agregar.setEnabled(false);
+            }
+            
+            
+        }
+
+
+
     }//GEN-LAST:event_estadoKeyReleased
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
@@ -238,8 +238,15 @@ habi.guardarHabitacion(hab);
      }
  }
  
+    
+   
+     
+           
+        
+ }
+ 
  
  
 
 
-}
+

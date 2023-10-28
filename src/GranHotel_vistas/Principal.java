@@ -15,7 +15,8 @@ import javax.swing.JPanel;
  * @author Usuario
  */
 public class Principal extends javax.swing.JFrame {
-    FondoPanel fondo=new FondoPanel();
+
+    FondoPanel fondo = new FondoPanel();
 
     /**
      * Creates new form Principal

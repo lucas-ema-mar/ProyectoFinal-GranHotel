@@ -5,11 +5,32 @@
  */
 package GranHotel_vistas;
 
+import GranHotel_AccesoADatos.HabitacionData;
+import GranHotel_AccesoADatos.HuespedData;
+import GranHotel_AccesoADatos.ReservaData;
+import GranHotel_AccesoADatos.TipoHabitacionData;
+import GranHotel_Entidades.Habitacion;
+import GranHotel_Entidades.Huesped;
+import GranHotel_Entidades.Reserva;
+import GranHotel_Entidades.TipoHabitacion;
 import GranHotel_vistas.AgregarTipoHabitacion.FondoPanel;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 
@@ -19,13 +40,18 @@ import javax.swing.JPanel;
  */
 public class Reservar extends javax.swing.JInternalFrame {
   FondoPanel fondo=new FondoPanel();
-
+  long dias;
+  
+  
+  
     /**
      * Creates new form Reservar
      */
     public Reservar() {
         this.setContentPane(fondo);
         initComponents();
+        rellenarCombo();
+        
     }
 
     /**
@@ -38,18 +64,27 @@ public class Reservar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combohues = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        combo2 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        texto1 = new javax.swing.JTextField();
+        cantPers = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        texto2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        estado = new javax.swing.JTextField();
+        agregar = new javax.swing.JButton();
+        limpiarr = new javax.swing.JButton();
+        ingreso = new com.toedter.calendar.JDateChooser();
+        salida = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        cantDias = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        Precio = new javax.swing.JTextField();
+        carga1 = new javax.swing.JButton();
+        carga2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 0, 0));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
         setIconifiable(true);
@@ -59,13 +94,17 @@ public class Reservar extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Huesped");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combohues.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Habitacion");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,20 +118,92 @@ public class Reservar extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cantidad De Personas");
 
+        cantPers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantPersActionPerformed(evt);
+            }
+        });
+        cantPers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cantPersKeyReleased(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Estado(true/else)");
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                estadoKeyReleased(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton2.setText("Limpiar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        agregar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        agregar.setText("Agregar");
+        agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregar.setEnabled(false);
+        agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                agregarActionPerformed(evt);
+            }
+        });
+
+        limpiarr.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        limpiarr.setText("Limpiar");
+        limpiarr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        limpiarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarrActionPerformed(evt);
+            }
+        });
+
+        ingreso.setMaxSelectableDate(new java.util.Date(253370779307000L));
+        ingreso.setMinSelectableDate(new java.util.Date(-62135755093000L));
+        ingreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ingresoKeyReleased(evt);
+            }
+        });
+
+        salida.setEnabled(false);
+        salida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salidaMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Cantidad De dias");
+
+        cantDias.setEnabled(false);
+        cantDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cantDiasKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Precio Total");
+
+        Precio.setEnabled(false);
+
+        carga1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        carga1.setText("Cargar");
+        carga1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carga1ActionPerformed(evt);
+            }
+        });
+
+        carga2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        carga2.setText("Cargar");
+        carga2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carga2ActionPerformed(evt);
             }
         });
 
@@ -101,81 +212,296 @@ public class Reservar extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(combohues, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel3)
+                    .addComponent(ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(cantPers, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(texto1)
-                            .addComponent(texto2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                        .addComponent(carga1))
+                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(limpiarr))
+                            .addComponent(carga2)))
+                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(combohues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cantPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cantDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carga1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(49, 49, 49))
+                    .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carga2))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregar)
+                    .addComponent(limpiarr))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-texto1.setText("");
-texto2.setText("");
+    private void limpiarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarrActionPerformed
+limpiar();
+
+    }//GEN-LAST:event_limpiarrActionPerformed
+
+    private void cantPersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantPersKeyReleased
+VeriNum(evt);
+
+if(Integer.parseInt(cantPers.getText())>=1&&Integer.parseInt(cantPers.getText())<=8){
+        cantPers.setEnabled(false);
+       int cant=Integer.parseInt(cantPers.getText());
+       rellenarCombo2(cant);
+        
+}else 
+    if(Integer.parseInt(cantPers.getText())<0||Integer.parseInt(cantPers.getText())>8){
+        JOptionPane.showMessageDialog(this, "NO SE PERMITE ESA CANTIDAD DE PERSONAS");
+        JOptionPane.showMessageDialog(this, "DEBE INGRESAR ENTRE 1 A 8 PERSONAS");
+        cantPers.setText("");
+    }else
+        if(cantPers.getText().length()>1){
+        JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN CARACTER");
+        cantPers.setText("");
+        }
+
+//codigo para verificar campo vacio
+if(!cantPers.getText().isEmpty()&&!estado.getText().isEmpty()&&!cantDias.getText().isEmpty()&&!estado.getText().isEmpty()&&!Precio.getText().isEmpty()){
+    agregar.setEnabled(true);
+}
+ingreso.setEnabled(false);
+liberarsalida();
+
+
+
+
+
+
+    }//GEN-LAST:event_cantPersKeyReleased
+
+    private void estadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_estadoKeyReleased
+validacion(evt);
+
+
+if (estado.getText().length() == 4) {
+            String a = estado.getText();
+            if ("else".equals(a) || "ELSE".equals(a) || "true".equals(a) || "TRUE".equals(a)) {
+                estado.setEnabled(false);
+                estado.setEditable(false);
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O ELSE");
+                estado.setText("");
+                agregar.setEnabled(false);
+            }
+            
+        }
+//CAMPOS VACIOS
+if(!cantPers.getText().isEmpty()&&!estado.getText().isEmpty()&&!cantDias.getText().isEmpty()&&!estado.getText().isEmpty()&&!Precio.getText().isEmpty()){
+    agregar.setEnabled(true);
+}
+liberarsalida();
+
+    }//GEN-LAST:event_estadoKeyReleased
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+       //convertimos a date lo seleccionado en el calendario
+       Date ingre=ingreso.getDate();
+       Date sali=salida.getDate();
+       //damos formato 
+       SimpleDateFormat formato=new SimpleDateFormat("dd-mm-yyyy");
+       //le pasamos los datos
+       String ingresoo=formato.format(ingre);
+       String salidaa=formato.format(sali);
+       
+       
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void ingresoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ingresoKeyReleased
+   
+
+
+    }//GEN-LAST:event_ingresoKeyReleased
+
+    private void cantDiasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantDiasKeyReleased
+        VeriNum(evt);
+        liberarsalida();
+        //CAMPOS VACIOS
+        if (!cantPers.getText().isEmpty() && !estado.getText().isEmpty() && !cantDias.getText().isEmpty() && !estado.getText().isEmpty() && !Precio.getText().isEmpty()) {
+            agregar.setEnabled(true);
+        }
+        
+        
+        
+
+
 
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cantDiasKeyReleased
+
+    private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salidaMouseClicked
+
+    private void carga1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carga1ActionPerformed
+ 
+        if(ingreso.getDate().getTime()>0&&salida.getDate().getTime()>0){
+            if ( ingreso.getDate().getTime()<salida.getDate().getTime()) {
+                long tiempo = 0;
+                tiempo = salida.getDate().getTime() - ingreso.getDate().getTime();
+
+                TimeUnit unidad = TimeUnit.DAYS;
+
+                dias = unidad.convert(tiempo, TimeUnit.MILLISECONDS);
+
+                cantDias.setText(Long.toString(dias) + " Dias");
+                salida.setEnabled(false);
+                ingreso.setEnabled(false);
+            }else{
+                 if(salida.getDate().getTime()<ingreso.getDate().getTime()){
+                    JOptionPane.showMessageDialog(this, "ELIJA UNA FECHA POSTERIOR A LA INGRESADA");
+                    ingreso.setEnabled(false);
+                    salida.setEnabled(true);
+                    salida.setDate(null);
+                    
+                    
+                    
+                }
+                
+        }
+        
+    
+    //CAMPOS VACIOS
+    if(!cantPers.getText().isEmpty()&&!estado.getText().isEmpty()&&!cantDias.getText().isEmpty()&&!estado.getText().isEmpty()&&!Precio.getText().isEmpty()){
+    agregar.setEnabled(true);
+}
+        }
+
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_carga1ActionPerformed
+
+    private void carga2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carga2ActionPerformed
+
+        TipoHabitacionData tip=new TipoHabitacionData();
+  TipoHabitacion tipohab=new TipoHabitacion();
+  int num=(int) combo2.getSelectedItem();
+  double precio;
+  double cuenta;
+  
+  tipohab=tip.buscarTipoHabitacionPorCodigo(num);
+  precio=tipohab.getPrecio();
+  if(dias>0){
+  cuenta=dias*precio;
+  Precio.setText(String. valueOf (cuenta));
+  }
+    //CAMPOS VACIOS
+    if(!cantPers.getText().isEmpty()&&!estado.getText().isEmpty()&&!cantDias.getText().isEmpty()&&!estado.getText().isEmpty()&&!Precio.getText().isEmpty()){
+    agregar.setEnabled(true);
+}
+    liberarsalida();
+        
+    }//GEN-LAST:event_carga2ActionPerformed
+
+    private void cantPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantPersActionPerformed
+salida.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantPersActionPerformed
+
+    private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
+   
+     
+     
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JTextField Precio;
+    private javax.swing.JButton agregar;
+    private javax.swing.JTextField cantDias;
+    private javax.swing.JTextField cantPers;
+    private javax.swing.JButton carga1;
+    private javax.swing.JButton carga2;
+    private javax.swing.JComboBox combo2;
+    private javax.swing.JComboBox combohues;
+    private javax.swing.JTextField estado;
+    private com.toedter.calendar.JDateChooser ingreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField texto1;
-    private javax.swing.JTextField texto2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton limpiarr;
+    private com.toedter.calendar.JDateChooser salida;
     // End of variables declaration//GEN-END:variables
 
 class FondoPanel extends JPanel{
@@ -188,16 +514,83 @@ class FondoPanel extends JPanel{
         super.paint(g);
  }
 }
-//class FondoPanel2 extends JPanel{
-//    private Image imagen;
-//    @Override
-//    public void paint(Graphics g){
-//        imagen=new ImageIcon(getClass().getResource("/Imagenes/fondo1.jpg")).getImage();
-//        g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-//        setOpaque(false);
-//        super.paint(g);
-// }
-//}
+public void rellenarCombo(){
+    HuespedData hu=new HuespedData();
+    
+    
+    for(Huesped hues:hu.listarHuespedesActivos()){
+        combohues.addItem(hues.toString());
+    }
+    
+ 
+}
+public void rellenarCombo2(int numer){
+    HabitacionData hab=new HabitacionData();
+    
+    for(Habitacion habi:hab.listarPorCantidadPersonas(numer)){
+        combo2.addItem(habi.getNum() + " , " + habi.getTipoHabitacion().toString());
+        String w = Integer.toString((int) combo2.getSelectedItem());
+        JOptionPane.showMessageDialog(this, w);
 
+    
+        
+    }
+    
+}
+public void limpiar(){
+    
+     cantPers.setText("");
+     cantPers.setEnabled(true);
+     cantPers.setEditable(true);
+     estado.setText("");
+     estado.setEnabled(true);
+     estado.setEditable(true);
+     cantDias.setText("");
+     Precio.setText("");
+    // reiniciar combo
+    combo2.removeAllItems();
+    agregar.setEnabled(false);
+    dias=0;
+    ingreso.setEnabled(true);
+   //reiniciar calendario
+    ingreso.setDate(null);
+    salida.setDate(null);
+    
+    salida.setEnabled(false);
+     
+}
 
+private void VeriNum(java.awt.event.KeyEvent evento){    
+    if (evento.getKeyChar() >= 32 && evento.getKeyChar() <= 47
+            || evento.getKeyChar() >= 58 && evento.getKeyChar() <= 255) {
+        evento.consume();
+        JOptionPane.showMessageDialog(this, "INGRESE SOLO NUMEROS,SIN SIMBOLOS");
+        
+    }
+    
+    }
+public void validacion(java.awt.event.KeyEvent evento){
+    
+//codigo para verificar caracteres 
+    if(evento.getKeyChar()>=33 && evento.getKeyChar()<=64 
+            || evento.getKeyChar()>=91 && evento.getKeyChar()<=96
+            || evento.getKeyChar()>=123 && evento.getKeyChar()<=208){
+        
+        evento.consume();
+        
+        JOptionPane.showMessageDialog(this, "NO SE PERMITEN CARACTERES ESPECIALES");
+        limpiar();
+        
+    }
+
+}
+
+public void liberarsalida(){
+    if (ingreso.getDate().getTime() > 0) {
+        salida.setMinSelectableDate(ingreso.getDate());
+
+        salida.setEnabled(true);
+    }
+
+}
 }

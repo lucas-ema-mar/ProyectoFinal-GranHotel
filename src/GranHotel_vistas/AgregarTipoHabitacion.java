@@ -20,6 +20,7 @@ import javax.swing.JPanel;
  */
 public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
     FondoPanel fondo=new FondoPanel();
+    
 
     /**
      * Creates new form AgregarTipoHabitacion
@@ -186,8 +187,10 @@ public class AgregarTipoHabitacion extends javax.swing.JInternalFrame {
         TipoHabitacion habitacion = new TipoHabitacion();
 
         habitacion.setCantCamas(Integer.parseInt(cantcamas.getText()));
+
         habitacion.setMaxPersonas(Integer.parseInt(max.getText()));
         habitacion.setTipoDeCama((TipoCama) combo.getSelectedItem());
+        
         habitacion.setPrecio(Integer.parseInt(precio.getText()));
 
         tipocama.guardarTipoHabitacion(habitacion);
@@ -212,6 +215,8 @@ VeriNum(evt);
 
 if(Integer.parseInt(max.getText())>=1&&Integer.parseInt(max.getText())<=8){
         max.setEnabled(false);
+        
+        
 }else 
     if(Integer.parseInt(max.getText())<0||Integer.parseInt(max.getText())>9){
         JOptionPane.showMessageDialog(this, "NO SE PERMITE ESA CANTIDAD DE PERSONAS");
@@ -260,9 +265,11 @@ if(precio.getText().length()>5){
     boton.setEnabled(false);
 }
 //CODIGO PARA VERIFICAR CAMPOS VACIOS
+
 if(!max.getText().isEmpty()&&!cantcamas.getText().isEmpty()&&!precio.getText().isEmpty()){
     boton.setEnabled(true);
 }
+
     }//GEN-LAST:event_precioKeyReleased
 
 
@@ -319,12 +326,23 @@ private void limpiar(){
 
 
 private void VeriNum(java.awt.event.KeyEvent evento){    
-   if(evento.getKeyChar()>=32&&evento.getKeyChar()<=47
+    if (evento.getKeyChar() >= 32 && evento.getKeyChar() <= 47
             || evento.getKeyChar() >= 58 && evento.getKeyChar() <= 255) {
         evento.consume();
         JOptionPane.showMessageDialog(this, "INGRESE SOLO NUMEROS,SIN SIMBOLOS");
+        max.setText("");
+        precio.setText("");
+        cantcamas.setText("");
+        max.setEnabled(true);
+        max.setEditable(true);
         
+        precio.setEditable(true);
+        precio.setEnabled(true);
         
+        cantcamas.setEditable(true);
+        cantcamas.setEnabled(true);
+        
+
    }
 }
 
