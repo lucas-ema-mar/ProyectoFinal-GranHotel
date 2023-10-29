@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
@@ -139,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
         jButton19.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono6.png"))); // NOI18N
-        jButton19.setText("Buscar / Modificar Precio");
+        jButton19.setText("Buscar / Modificar Tipo Habitacion");
         jButton19.setBorder(null);
         jButton19.setBorderPainted(false);
         jButton19.setContentAreaFilled(false);
@@ -190,6 +191,21 @@ public class Principal extends javax.swing.JFrame {
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton23ActionPerformed(evt);
+            }
+        });
+
+        jButton24.setBackground(new java.awt.Color(0, 0, 0));
+        jButton24.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButton24.setForeground(new java.awt.Color(255, 255, 255));
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono11.png"))); // NOI18N
+        jButton24.setText("Cancelar Reserva");
+        jButton24.setBorder(null);
+        jButton24.setBorderPainted(false);
+        jButton24.setContentAreaFilled(false);
+        jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
             }
         });
 
@@ -260,7 +276,8 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jButton23)
-                                        .addComponent(jButton25))))))
+                                        .addComponent(jButton25)
+                                        .addComponent(jButton24))))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton16))
@@ -284,7 +301,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton23)
-                .addGap(47, 47, 47)
+                .addGap(17, 17, 17)
+                .addComponent(jButton24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(11, 11, 11)
                 .addComponent(jButton17)
@@ -314,7 +333,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(698, Short.MAX_VALUE))
+                .addContainerGap(675, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +417,15 @@ public class Principal extends javax.swing.JFrame {
         Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
 
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+
+        Escritorio.repaint();
+        CancelarReserva mod = new CancelarReserva();
+        mod.setVisible(true);
+        Escritorio.add(mod);
+        Escritorio.moveToFront(mod);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton24ActionPerformed
+
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
 
         Escritorio.repaint();
@@ -427,7 +455,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         Escritorio.repaint();
-        ModificarPrecio mod = new ModificarPrecio();
+        BuscarTipoHabitacion mod = new BuscarTipoHabitacion();
         mod.setVisible(true);
         Escritorio.add(mod);
         Escritorio.moveToFront(mod);         // TODO add your handling code here:
@@ -487,6 +515,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
