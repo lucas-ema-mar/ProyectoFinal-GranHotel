@@ -27,7 +27,9 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                      <Component id="jbCancelarReserva" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -35,7 +37,7 @@
                       <Component id="jbBuscar" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="204" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -53,6 +55,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jdcFecha" min="-2" pref="196" max="-2" attributes="0"/>
                           <Component id="jtNumReserva" min="-2" pref="312" max="-2" attributes="0"/>
                           <Component id="jtDni" min="-2" pref="312" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -86,13 +89,19 @@
                   <Component id="jtDni" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="jdcFecha" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="108" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbCancelarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -121,6 +130,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtReservasMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -182,6 +194,8 @@
         <Property name="text" type="java.lang.String" value="Por fecha de inicio"/>
       </Properties>
     </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdcFecha">
+    </Component>
     <Component class="javax.swing.JButton" name="jbBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
@@ -210,6 +224,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Complete el campo por el cual desea buscar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbCancelarReserva">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar Reseva"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarReservaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

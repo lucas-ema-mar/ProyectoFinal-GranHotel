@@ -126,6 +126,31 @@ private int idReserva;
                 + "\nPrecio Total: $ " + precioTotal 
                 + "\nEstado: " + (estado==true ? "Activa" : "Inactiva");
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + this.idReserva;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Reserva other = (Reserva) obj;
+        if (this.idReserva != other.idReserva) {
+            return false;
+        }
+        return true;
+    }
     
     
     

@@ -10,6 +10,7 @@ import GranHotel_Entidades.Huesped;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HistorialHuesped extends javax.swing.JInternalFrame {
     FondoPanel fondo=new FondoPanel();
+    int huesSelec;
     private DefaultTableModel modelo = new DefaultTableModel(){
         public boolean isCellEditable(int f, int c){
             return false;
@@ -42,6 +44,7 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
                 (hues.isActivo() ? "Si" : "No")
             });
         }
+        deshabilitarBotones();
     }
 
     /**
@@ -60,6 +63,8 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtApellido = new javax.swing.JTextField();
+        jbBajaHuesped = new javax.swing.JButton();
+        jbAltaHuesped = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -94,6 +99,11 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        jtHuespedes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtHuespedesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtHuespedes);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -110,29 +120,51 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBajaHuesped.setText("Baja Huesped");
+        jbBajaHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaHuespedActionPerformed(evt);
+            }
+        });
+
+        jbAltaHuesped.setText("Alta Huesped");
+        jbAltaHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaHuespedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtDni))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtDni))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(151, 151, 151)
+                                .addComponent(jtApellido))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(307, 307, 307))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jtApellido)))
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 102, Short.MAX_VALUE)
+                .addComponent(jbAltaHuesped)
+                .addGap(53, 53, 53)
+                .addComponent(jbBajaHuesped)
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +181,13 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
                         .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbBajaHuesped)
+                    .addComponent(jbAltaHuesped))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -163,6 +199,7 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         HuespedData hd = new HuespedData();
         borrarFilas();
+        deshabilitarBotones();
         
         for(Huesped hues: hd.listarHistorialDeHuespedes()){
             
@@ -185,6 +222,7 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
         jtDni.setText("");
         HuespedData hd = new HuespedData();
         borrarFilas();
+        deshabilitarBotones();
         
         for(Huesped hues: hd.listarHistorialDeHuespedes()){
             
@@ -201,17 +239,58 @@ public class HistorialHuesped extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtApellidoKeyReleased
 
+    private void jtHuespedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtHuespedesMouseClicked
+        // TODO add your handling code here:
+        
+        huesSelec = Integer.valueOf(jtHuespedes.getValueAt(jtHuespedes.getSelectedRow(), 2).toString());
+        HuespedData hd = new HuespedData();
+        if(hd.buscarHuespedPorDni(huesSelec).isActivo()){
+            jbBajaHuesped.setEnabled(true);
+            jbAltaHuesped.setEnabled(false);
+            
+        }else{
+            jbAltaHuesped.setEnabled(true);
+            jbBajaHuesped.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jtHuespedesMouseClicked
+
+    private void jbBajaHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaHuespedActionPerformed
+        // TODO add your handling code here:
+        
+        HuespedData hd = new HuespedData();
+        hd.bajaHuesped(huesSelec);
+        
+    }//GEN-LAST:event_jbBajaHuespedActionPerformed
+
+    private void jbAltaHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaHuespedActionPerformed
+        // TODO add your handling code here:
+        HuespedData hd = new HuespedData();
+        hd.altaHuesped(huesSelec);
+        
+    }//GEN-LAST:event_jbAltaHuespedActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAltaHuesped;
+    private javax.swing.JButton jbBajaHuesped;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTable jtHuespedes;
     // End of variables declaration//GEN-END:variables
 
+    private void deshabilitarBotones(){
+        
+        huesSelec = -1;
+        jbAltaHuesped.setEnabled(false);
+        jbBajaHuesped.setEnabled(false);
+        
+    }
+    
     private void armarCabecera(){
         
         modelo.addColumn("Apellido");

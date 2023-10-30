@@ -50,7 +50,6 @@ public class Principal extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
@@ -140,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
         jButton19.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono6.png"))); // NOI18N
-        jButton19.setText("Buscar / Modificar Tipo Habitacion");
+        jButton19.setText("Cambiar Precio");
         jButton19.setBorder(null);
         jButton19.setBorderPainted(false);
         jButton19.setContentAreaFilled(false);
@@ -168,7 +167,7 @@ public class Principal extends javax.swing.JFrame {
         jButton22.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton22.setForeground(new java.awt.Color(255, 255, 255));
         jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono9.png"))); // NOI18N
-        jButton22.setText("Tipo de Habitaciones");
+        jButton22.setText("Habitaciones");
         jButton22.setBorder(null);
         jButton22.setBorderPainted(false);
         jButton22.setContentAreaFilled(false);
@@ -191,21 +190,6 @@ public class Principal extends javax.swing.JFrame {
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton23ActionPerformed(evt);
-            }
-        });
-
-        jButton24.setBackground(new java.awt.Color(0, 0, 0));
-        jButton24.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton24.setForeground(new java.awt.Color(255, 255, 255));
-        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono11.png"))); // NOI18N
-        jButton24.setText("Cancelar Reserva");
-        jButton24.setBorder(null);
-        jButton24.setBorderPainted(false);
-        jButton24.setContentAreaFilled(false);
-        jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton24ActionPerformed(evt);
             }
         });
 
@@ -266,43 +250,45 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jButton26)
                             .addComponent(jButton20)
                             .addComponent(jButton22)
-                            .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(91, 91, 91)
                                 .addComponent(jLabel7))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton23)
-                                        .addComponent(jButton25)
-                                        .addComponent(jButton24))))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton25)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(jButton23)
+                                            .addGap(63, 63, 63)))))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton16))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(88, 88, 88)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton23)
-                .addGap(17, 17, 17)
-                .addComponent(jButton24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(11, 11, 11)
@@ -333,7 +319,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(675, Short.MAX_VALUE))
+                .addContainerGap(698, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,20 +397,12 @@ public class Principal extends javax.swing.JFrame {
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
 
         Escritorio.repaint();
-        Reservar mod = new Reservar();
+        CrearReserva mod = new CrearReserva();
+//        Reservar mod = new Reservar();
         mod.setVisible(true);
         Escritorio.add(mod);
         Escritorio.moveToFront(mod);// TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
-
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-
-        Escritorio.repaint();
-        CancelarReserva mod = new CancelarReserva();
-        mod.setVisible(true);
-        Escritorio.add(mod);
-        Escritorio.moveToFront(mod);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
 
@@ -455,7 +433,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         Escritorio.repaint();
-        BuscarTipoHabitacion mod = new BuscarTipoHabitacion();
+        ModificarPrecio mod = new ModificarPrecio();
         mod.setVisible(true);
         Escritorio.add(mod);
         Escritorio.moveToFront(mod);         // TODO add your handling code here:
@@ -515,7 +493,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
@@ -525,6 +502,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarEstadosHabResHues(){
+        
+    }
+    
 class FondoPanel extends JPanel {
 
         private Image imagen;
@@ -538,7 +520,7 @@ class FondoPanel extends JPanel {
         }
     }
 
-    class FondoPanel3 extends JPanel {
+class FondoPanel3 extends JPanel {
 
         private Image imagen;
 

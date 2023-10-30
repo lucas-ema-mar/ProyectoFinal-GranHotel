@@ -105,6 +105,8 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Estado");
 
+        jrbLibre.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jrbLibre.setForeground(new java.awt.Color(0, 0, 0));
         jrbLibre.setText("Libre");
         jrbLibre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +114,8 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jrbOcupado.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jrbOcupado.setForeground(new java.awt.Color(0, 0, 0));
         jrbOcupado.setText("Ocupado");
         jrbOcupado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +123,14 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbTipoHab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoHabActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setText("Tipos de habitaciones");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,6 +143,9 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jcbTipoHab, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -146,13 +161,7 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jrbOcupado)
                                 .addGap(31, 31, 31)
-                                .addComponent(jrbLibre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 120, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jcbTipoHab, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jrbLibre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(184, 184, 184)
                                 .addComponent(jBModificar)
@@ -161,7 +170,7 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(274, 274, 274)
                                 .addComponent(jLabel4)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 120, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -263,6 +272,10 @@ public class ModificarHabitacion extends javax.swing.JInternalFrame {
     private void jTNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNumActionPerformed
+
+    private void jcbTipoHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoHabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbTipoHabActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

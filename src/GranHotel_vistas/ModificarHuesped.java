@@ -90,26 +90,44 @@ FondoPanel fondo=new FondoPanel();
         });
 
         jLabelApellido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelApellido.setForeground(new java.awt.Color(255, 255, 255));
         jLabelApellido.setText("Apellido");
 
         jLabelNombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelNombre.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNombre.setText("Nombre");
 
         jLabelDomicilio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelDomicilio.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDomicilio.setText("Domicilio");
 
         jLabelCorreo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelCorreo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCorreo.setText("Correo");
 
         jLabelCelular.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelCelular.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCelular.setText("Celular");
 
         jLabelEstado.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelEstado.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEstado.setText("Estado");
 
+        jrbActivo.setForeground(new java.awt.Color(255, 255, 255));
         jrbActivo.setText("ACTIVO");
+        jrbActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActivoActionPerformed(evt);
+            }
+        });
 
+        jrbInactivo.setForeground(new java.awt.Color(255, 255, 255));
         jrbInactivo.setText("INACTIVO");
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -221,7 +239,7 @@ FondoPanel fondo=new FondoPanel();
         jtCorreo.setText("");
         jtCelular.setText("");
         jrbActivo.setSelected(false);
-        jrbInactivo.setEnabled(false);
+        jrbInactivo.setSelected(false);
     }
      
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -239,14 +257,15 @@ FondoPanel fondo=new FondoPanel();
                 jtApellido.setText(hues.getApellido());
                 jtNombre.setText(hues.getNombre());
                 jtDomicilio.setText(hues.getDomicilio());
+                jtCorreo.setText(hues.getCorreo());
                 jtCelular.setText(hues.getCelular() + "");
                 if (hues.isActivo()) {
                     jrbActivo.setSelected(true);
                     jrbInactivo.setSelected(false);
                 } else {
                     jrbActivo.setSelected(false);
+                    jrbInactivo.setSelected(true);
                 }
-                jrbInactivo.setSelected(true);
                 
             }
             
@@ -273,6 +292,19 @@ FondoPanel fondo=new FondoPanel();
             limpiarCampos();
         }
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
+        // TODO add your handling code here:
+        jrbActivo.setSelected(true);
+        jrbInactivo.setSelected(false);
+        
+    }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        // TODO add your handling code here:
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(true);
+    }//GEN-LAST:event_jrbInactivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

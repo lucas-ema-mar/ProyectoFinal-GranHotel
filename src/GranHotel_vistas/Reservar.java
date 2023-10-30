@@ -75,8 +75,6 @@ public class Reservar extends javax.swing.JInternalFrame {
         estado = new javax.swing.JTextField();
         agregar = new javax.swing.JButton();
         limpiarr = new javax.swing.JButton();
-        ingreso = new com.toedter.calendar.JDateChooser();
-        salida = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         cantDias = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -95,6 +93,11 @@ public class Reservar extends javax.swing.JInternalFrame {
         jLabel1.setText("Huesped");
 
         combohues.setToolTipText("");
+        combohues.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combohuesActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,21 +161,6 @@ public class Reservar extends javax.swing.JInternalFrame {
             }
         });
 
-        ingreso.setMaxSelectableDate(new java.util.Date(253370779307000L));
-        ingreso.setMinSelectableDate(new java.util.Date(-62135755093000L));
-        ingreso.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                ingresoKeyReleased(evt);
-            }
-        });
-
-        salida.setEnabled(false);
-        salida.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salidaMouseClicked(evt);
-            }
-        });
-
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -221,7 +209,6 @@ public class Reservar extends javax.swing.JInternalFrame {
                     .addComponent(combohues, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel3)
-                    .addComponent(ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(cantPers, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -230,7 +217,6 @@ public class Reservar extends javax.swing.JInternalFrame {
                         .addComponent(carga1))
                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -252,17 +238,13 @@ public class Reservar extends javax.swing.JInternalFrame {
                 .addComponent(combohues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cantPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,6 +462,10 @@ salida.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_combo2ActionPerformed
 
+    private void combohuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combohuesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combohuesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Precio;
@@ -491,7 +477,6 @@ salida.setEnabled(true);
     private javax.swing.JComboBox combo2;
     private javax.swing.JComboBox combohues;
     private javax.swing.JTextField estado;
-    private com.toedter.calendar.JDateChooser ingreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -501,7 +486,6 @@ salida.setEnabled(true);
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JButton limpiarr;
-    private com.toedter.calendar.JDateChooser salida;
     // End of variables declaration//GEN-END:variables
 
 class FondoPanel extends JPanel{

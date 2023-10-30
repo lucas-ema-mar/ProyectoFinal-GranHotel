@@ -116,6 +116,8 @@ public class ProyectoFinalGranHotel {
 //            LocalDate.now().plusDays(17), LocalDate.now().plusDays(20), 3, true));
 //        resData.crearReserva(new Reserva(hd.buscarHuespedPorDni(34771759), habData.buscarHabitacion(1), 
 //            LocalDate.now().plusDays(20), LocalDate.now().plusDays(21), 1, true));
+//        resData.crearReserva(new Reserva(hd.buscarHuespedPorDni(34771759), habData.buscarHabitacion(10), 
+//            LocalDate.now().plusDays(20), LocalDate.now().plusDays(21), 1, true));
 //        resData.modificarReserva(new Reserva(1, hd.buscarHuespedPorDni(34771759), habData.buscarHabitacion(2), 
 //            LocalDate.now(), LocalDate.now().plusDays(4), 1, true));
 //        resData.modificarReserva(new Reserva(2, hd.buscarHuespedPorDni(20622354), habData.buscarHabitacion(6), 
@@ -130,14 +132,24 @@ public class ProyectoFinalGranHotel {
 //        for(Reserva res : reservas){
 //            System.out.println(res);
 //            System.out.println("---------------");
-//        }
-        List<Reserva> reservas = resData.buscarPorFecha(LocalDate.now().plusDays(17));
+////        }
+        List<Reserva> reservas = resData.reservasActivas();
         for(Reserva res : reservas){
             System.out.println(res);
             System.out.println("---------------");
         }
-        
-        
+        System.out.println(reservas.remove(resData.buscarPorId(1)));
+        System.out.println("---------");
+        for(Reserva res : reservas){
+            System.out.println(res);
+            System.out.println("---------------");
+        }
+
+//        System.out.println(LocalDate.now().plusDays(1).compareTo(LocalDate.now()));
+//        System.out.println(LocalDate.now().compareTo(LocalDate.now()));
+//        System.out.println(LocalDate.now().compareTo(LocalDate.now().plusDays(1)));
+
+
         
     }
     

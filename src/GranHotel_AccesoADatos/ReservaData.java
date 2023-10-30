@@ -180,6 +180,43 @@ public class ReservaData {
 
     }
     
+    public List<Reserva> reservasActivas(){
+        
+        String sql = "SELECT idReserva, dniHuesped, numHabitacion, fechaIngreso, fechaSalida, "
+                + "cantDias, cantPersonas, precioTotal FROM reserva WHERE estado = 1";
+        ArrayList<Reserva> reservas= new ArrayList<>();
+
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Reserva reserva = new Reserva();
+                HuespedData huesData = new HuespedData();
+                HabitacionData habData = new HabitacionData();
+                reserva.setIdReserva(rs.getInt("idReserva"));
+                reserva.setHuesped(huesData.buscarHuespedPorDni(rs.getInt("dniHuesped")));
+                reserva.setHabitacion(habData.buscarHabitacion(rs.getInt("numHabitacion")));
+                reserva.setFechaIngreso(rs.getDate("fechaIngreso").toLocalDate());
+                reserva.setFechaSalida(rs.getDate("fechaSAlida").toLocalDate());
+                reserva.setCantDias(rs.getInt("cantDias"));
+                reserva.setCantPersonas(rs.getInt("cantPersonas"));
+                reserva.setPrecioTotal(rs.getDouble("precioTotal"));
+                reserva.setEstado(true);
+                reservas.add(reserva);
+        }
+            
+                
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA RESERVA. " + ex.getMessage());
+        }
+        return reservas;
+        
+    }
+    
     
     public void modificarReserva(Reserva reserva) {
         String sql = "UPDATE reserva SET dniHuesped=?, numHabitacion=?, fechaIngreso=?,fechaSalida=?, "
