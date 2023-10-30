@@ -56,7 +56,7 @@ public class AgregarHabitacion extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ocupada(true/else)");
+        jLabel2.setText("Ocupada(true/false)");
 
         estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,10 +73,15 @@ public class AgregarHabitacion extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tipo De Habitacion");
 
+        combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboActionPerformed(evt);
+            }
+        });
+
         agregar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         agregar.setText("Agregar");
         agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        agregar.setEnabled(false);
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -140,48 +145,46 @@ public class AgregarHabitacion extends javax.swing.JInternalFrame {
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
 limpiar();
-
-
-      
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void estadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_estadoKeyReleased
         
         validacion(evt);
         
-        if (estado.getText().length() == 4) {
-            String a = estado.getText();
-            if ("else".equals(a) || "ELSE".equals(a) || "true".equals(a) || "TRUE".equals(a)) {
-                estado.setEnabled(false);
-                estado.setEditable(false);
-                agregar.setEnabled(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O ELSE");
-                estado.setText("");
-                agregar.setEnabled(false);
-            }
-            
-            
-        }
+       
 
-
+    
 
     }//GEN-LAST:event_estadoKeyReleased
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-HabitacionData habi=new HabitacionData();
-Habitacion hab=new Habitacion();
 
-hab.setOcupada(Boolean.valueOf(estado.getText()));
-
-hab.setTipoHabitacion((TipoHabitacion) combo.getSelectedItem());
-habi.guardarHabitacion(hab);
- limpiar();
-
-
-
+        HabitacionData habi = new HabitacionData();
+        Habitacion hab = new Habitacion();
+        String s=estado.getText();
         
+           if ("FALSE".equals(s) || "false".equals(s)||"true".equals(s)||"TRUE".equals(s)) {
+            estado.setEnabled(false);
+            estado.setEditable(false);
+            agregar.setEnabled(true);
+            hab.setOcupada(Boolean.valueOf(estado.getText()));
+            hab.setTipoHabitacion((TipoHabitacion) combo.getSelectedItem());
+            habi.guardarHabitacion(hab);
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O FALSE");
+            estado.setText("");
+            agregar.setEnabled(false);
+            limpiar();
+        }
+    
+
+ 
     }//GEN-LAST:event_agregarActionPerformed
+
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -207,9 +210,9 @@ habi.guardarHabitacion(hab);
  
  public void limpiar(){
      estado.setText("");
-     agregar.setEnabled(false);
      estado.setEnabled(true);
      estado.setEditable(true);
+     agregar.setEnabled(true);
      
  }
  
@@ -237,13 +240,40 @@ habi.guardarHabitacion(hab);
      
      }
  }
- 
+ public void esta(){
+     if(estado.getText().length()==5){
+        String s=estado.getText();
+        if("ELSE".equals(s)||"else".equals(s)){
+            estado.setEnabled(false);
+            estado.setEditable(false);
+            agregar.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O FALSE");
+            estado.setText("");
+            agregar.setEnabled(false);
+        }
+    }
     
+     if (estado.getText().length() == 4) {
+            String a = estado.getText();
+            if ("true".equals(a) || "TRUE".equals(a)) {
+                estado.setEnabled(false);
+                estado.setEditable(false);
+                agregar.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O FALSE");
+                estado.setText("");
+                agregar.setEnabled(false);
+            }   
+        }
+
+    }                             
+ 
+}
+
    
-     
            
-        
- }
+ 
  
  
  

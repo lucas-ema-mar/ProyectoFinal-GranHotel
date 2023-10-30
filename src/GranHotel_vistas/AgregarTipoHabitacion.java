@@ -212,21 +212,21 @@ limpiar();
 
 
 VeriNum(evt);
+        if (max.getText().length() == 1) {
+            if (Integer.parseInt(max.getText()) >= 1 && Integer.parseInt(max.getText()) <= 8) {
+                max.setEnabled(false);
 
-if(Integer.parseInt(max.getText())>=1&&Integer.parseInt(max.getText())<=8){
-        max.setEnabled(false);
-        
-        
-}else 
-    if(Integer.parseInt(max.getText())<0||Integer.parseInt(max.getText())>9){
-        JOptionPane.showMessageDialog(this, "NO SE PERMITE ESA CANTIDAD DE PERSONAS");
-        JOptionPane.showMessageDialog(this, "DEBE INGRESAR ENTRE 1 A 8 PERSONAS");
-        max.setText("");
-    }else
-        if(max.getText().length()>1){
-        JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN CARACTER");
-        max.setText("");
+            } else if (Integer.parseInt(max.getText()) < 0 || Integer.parseInt(max.getText()) > 8) {
+                JOptionPane.showMessageDialog(this, "NO SE PERMITE ESA CANTIDAD DE PERSONAS");
+                JOptionPane.showMessageDialog(this, "DEBE INGRESAR ENTRE 1 A 8 PERSONAS");
+                max.setText("");
+            }
+        } else if (max.getText().length() > 1) {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN CARACTER");
+            max.setText("");
         }
+        
+        
    //CODIGO PARA VERIFICAR CAMPOS VACIOS
 if(!max.getText().isEmpty()&&!cantcamas.getText().isEmpty()&&!precio.getText().isEmpty()){
     boton.setEnabled(true);

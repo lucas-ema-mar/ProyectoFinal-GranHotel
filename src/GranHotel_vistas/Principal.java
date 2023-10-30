@@ -139,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
         jButton19.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono6.png"))); // NOI18N
-        jButton19.setText("Cambiar Precio");
+        jButton19.setText("Cambiar Precio / Tipo Habitacion");
         jButton19.setBorder(null);
         jButton19.setBorderPainted(false);
         jButton19.setContentAreaFilled(false);
@@ -319,7 +319,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(698, Short.MAX_VALUE))
+                .addContainerGap(683, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

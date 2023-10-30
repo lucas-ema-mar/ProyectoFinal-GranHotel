@@ -354,11 +354,17 @@ public class CrearReserva extends javax.swing.JInternalFrame {
 
     private void jbReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbReservarActionPerformed
         // TODO add your handling code here:
+        HuespedData huesData = new HuespedData();
         HabitacionData hd = new HabitacionData();
         ReservaData rd = new ReservaData();
         int numHab = Integer.parseInt(jtHabitaciones.getValueAt(jtHabitaciones.getSelectedRow(), 0).toString());
         
         Huesped hues = (Huesped) jcbHuespedes.getSelectedItem();
+        if(!hues.isActivo()){
+            
+            huesData.altaHuesped(hues.getDni());
+            
+        }
         Habitacion hab = hd.buscarHabitacion(numHab);
         LocalDate fechaIng = jdcFechaIng.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate fechaSal = jdcFechaSal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

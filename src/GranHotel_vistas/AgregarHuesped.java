@@ -94,7 +94,7 @@ int num=0;
 
         jLabel6.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Estado(true/else)");
+        jLabel6.setText("Estado(true/false)");
 
         Jnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -365,10 +365,19 @@ int num=0;
             Jestado.setText("");
             Jestado.setEditable(true);
             Jestado.setEnabled(true);
-        } else {
+        } else if ("FALSE".equals(Jestado.getText()) || "false".equals(Jestado.getText()) || "true".equals(Jestado.getText()) || "TRUE".equals(Jestado.getText())) {
             huesped.setActivo(Boolean.valueOf(Jestado.getText()));
             a = a + 1;
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O FALSE");
+            Jestado.setText("");
+
         }
+
+
+          
+        
 
         if (a == 7) {
             hues.guardarHuesped(huesped);
@@ -452,7 +461,7 @@ CampoVacio();
 
     private void JdomiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JdomiKeyReleased
 
-validacion(evt);
+
 
 if(!Jcorreo.getText().contains("@")||!Jcorreo.getText().contains(".com")){
              texto.setText("DEBE CONTENER @ Y .COM");
@@ -477,28 +486,9 @@ CampoVacio();
 
     private void JestadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JestadoKeyReleased
 
-validacion(evt);
-   if (Jestado.getText().length() == 4) {
-            String a = Jestado.getText();
-            if ("else".equals(a) || "ELSE".equals(a) || "true".equals(a) || "TRUE".equals(a)) {
-                Jestado.setEnabled(false);
-                Jestado.setEditable(false);
-                
-            } else {
-                JOptionPane.showMessageDialog(this, "DEBE INGRESAR TRUE O ELSE");
-                Jestado.setText("");
-                boton.setEnabled(false);
-                
-            }
-            
-            
-        }
+        validacion(evt);
+        CampoVacio();
 
- 
-            
-
-    CampoVacio();
- 
     }//GEN-LAST:event_JestadoKeyReleased
 
 
